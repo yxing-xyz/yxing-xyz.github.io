@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Bitwise Operation - 何年重遇天涯</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="基础 符号 描述 运算规则 &amp;amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &amp;lt;&amp;lt; 按位左移 各二进制位全部左移若干位，高位" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="/post/algorithm/bitwise_operator/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Bitwise Operation" />
+<meta property="og:description" content="基础 符号 描述 运算规则 &amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &lt;&lt; 按位左移 各二进制位全部左移若干位，高位" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/algorithm/bitwise_operator/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-11-23T11:28:03+08:00" />
+<meta property="article:modified_time" content="2021-07-22T14:28:00+08:00" />
+
+<meta itemprop="name" content="Bitwise Operation">
+<meta itemprop="description" content="基础 符号 描述 运算规则 &amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &lt;&lt; 按位左移 各二进制位全部左移若干位，高位"><meta itemprop="datePublished" content="2017-11-23T11:28:03+08:00" />
+<meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
+<meta itemprop="wordCount" content="533">
+<meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bitwise Operation"/>
+<meta name="twitter:description" content="基础 符号 描述 运算规则 &amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &lt;&lt; 按位左移 各二进制位全部左移若干位，高位"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">何年重遇天涯</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About Me</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">何年重遇天涯</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About Me</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Bitwise Operation</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-11-23 </span>
+        <div class="post-category">
+            <a href="/categories/algorithm/"> Algorithm </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基础">基础</a></li>
+        <li><a href="#技巧">技巧</a>
+          <ul>
+            <li><a href="#1变换符号位">1.变换符号位</a></li>
+            <li><a href="#2判断奇偶数">2.判断奇偶数</a></li>
+            <li><a href="#3小写转大写">3.小写转大写</a></li>
+            <li><a href="#4交换两数">4.交换两数</a></li>
+            <li><a href="#5求绝对值">5.求绝对值</a></li>
+            <li><a href="#6防溢出式求平均数">6.防溢出式求平均数</a></li>
+            <li><a href="#7数据类型高低位交换必须是无符号整数">7.数据类型高低位交换(必须是无符号整数)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="基础">基础</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">符号</th>
+<th style="text-align:right">描述</th>
+<th style="text-align:right">运算规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">&amp;</td>
+<td style="text-align:right">按位与</td>
+<td style="text-align:right">全为 1 为 1，否则为 0</td>
+</tr>
+<tr>
+<td style="text-align:right">|</td>
+<td style="text-align:right">按位或</td>
+<td style="text-align:right">全为 0 为 0，否则为 1</td>
+</tr>
+<tr>
+<td style="text-align:right">~</td>
+<td style="text-align:right">按位取反</td>
+<td style="text-align:right">0 变 1，1 变 0</td>
+</tr>
+<tr>
+<td style="text-align:right">&lt;&lt;</td>
+<td style="text-align:right">按位左移</td>
+<td style="text-align:right">各二进制位全部左移若干位，高位丢弃，低位补齐 0</td>
+</tr>
+<tr>
+<td style="text-align:right">&gt;&gt;</td>
+<td style="text-align:right">按位右移</td>
+<td style="text-align:right">正数补 0，负数补 1</td>
+</tr>
+<tr>
+<td style="text-align:right">^</td>
+<td style="text-align:right">按位异或</td>
+<td style="text-align:right">相同 0,相异 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意:</strong></p>
+<ol>
+<li>在这 6 种操作符，只有~取反是单目操作符，其它 5 种都是双目操作符</li>
+<li>位操作只能用于整形数据，对 float 和 double 类型进行位操作会被编译器报错</li>
+<li>注意运算符优先级，除了~其余都运算符等级都比较低。</li>
+</ol>
+<h2 id="技巧">技巧</h2>
+<h3 id="1变换符号位">1.变换符号位</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span>
+   <span class="n">a</span> <span class="o">=</span> <span class="o">~</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2判断奇偶数">2.判断奇偶数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
+	   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;奇数&#34;</span><span class="p">);</span>
+   <span class="k">else</span>
+	   <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;偶数&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3小写转大写">3.小写转大写</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="kt">char</span> <span class="n">str</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+   <span class="n">str</span> <span class="o">&amp;=</span> <span class="mh">0xDF</span><span class="p">;</span> <span class="c1">// A - a = 32 = 0xDF
+</span><span class="c1"></span>   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%c&#34;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4交换两数">4.交换两数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span>
+   <span class="n">b</span> <span class="o">^=</span> <span class="n">a</span><span class="p">;</span>
+   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span>
+   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d,%d&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="5求绝对值">5.求绝对值</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">((</span><span class="n">a</span> <span class="o">^</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="6防溢出式求平均数">6.防溢出式求平均数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="kt">int</span> <span class="n">avg</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">&amp;</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span><span class="p">((</span><span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">);</span>
+   <span class="c1">// x&amp;y相当于二进制都为1(x的1和y的1)保留,等于公共部分相加然后除2
+</span><span class="c1"></span>   <span class="c1">// (x^y)&gt;&gt;1 相当于二进制不同部分相加，然后&gt;&gt; 1等于除2
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="7数据类型高低位交换必须是无符号整数">7.数据类型高低位交换(必须是无符号整数)</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="kt">void</span> <span class="nf">PrintfBinary</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+	   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+       <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+	       <span class="k">if</span> <span class="p">((</span><span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
+		       <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">);</span>
+		   <span class="k">else</span>
+			   <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+	   <span class="p">}</span>
+	   <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+   <span class="n">PrintfBinary</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+   <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">half</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+   <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">half</span> <span class="o">|</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">half</span><span class="p">);</span>
+   <span class="n">PrintfBinary</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">何年重遇天涯</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-07-22
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank">Creative Commons Attribution-ShareAlike License</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/algorithm/">Algorithm</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/programming/data_type/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Data Type</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/configure/keyboard_mapping/">
+            <span class="next-text nav-default">Keyboard Mapping</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

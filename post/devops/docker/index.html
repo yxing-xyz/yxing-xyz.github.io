@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Docker - 何年重遇天涯</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="/post/devops/docker/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Docker" />
+<meta property="og:description" content="安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/devops/docker/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-06-21T14:55:46+08:00" />
+<meta property="article:modified_time" content="2021-07-22T14:28:00+08:00" />
+
+<meta itemprop="name" content="Docker">
+<meta itemprop="description" content="安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose"><meta itemprop="datePublished" content="2018-06-21T14:55:46+08:00" />
+<meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
+<meta itemprop="wordCount" content="1423">
+<meta itemprop="keywords" content="Bash," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker"/>
+<meta name="twitter:description" content="安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">何年重遇天涯</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About Me</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">何年重遇天涯</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About Me</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Docker</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-06-21 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装">安装</a>
+          <ul>
+            <li><a href="#centos">Centos</a></li>
+            <li><a href="#ubuntu">Ubuntu</a></li>
+          </ul>
+        </li>
+        <li><a href="#配置">配置</a>
+          <ul>
+            <li><a href="#配置-docker-镜像">配置 docker 镜像</a></li>
+          </ul>
+        </li>
+        <li><a href="#基本命令">基本命令</a>
+          <ul>
+            <li><a href="#拉取操作系统镜像">拉取操作系统镜像</a></li>
+            <li><a href="#镜像列表">镜像列表</a></li>
+            <li><a href="#创建网络">创建网络</a></li>
+            <li><a href="#普通模式运行镜像">普通模式运行镜像</a></li>
+            <li><a href="#容器和宿主机文件拷贝">容器和宿主机文件拷贝</a></li>
+            <li><a href="#停止删除容器和镜像">停止、删除容器和镜像</a></li>
+            <li><a href="#进入容器-shell">进入容器 Shell</a></li>
+            <li><a href="#所有-docker-打印的日志收集存储到-elasticsearch">所有 docker 打印的日志收集存储到 Elasticsearch</a></li>
+          </ul>
+        </li>
+        <li><a href="#注意点">注意点</a>
+          <ul>
+            <li><a href="#copy和add的联系和区别">COPY和ADD的联系和区别</a></li>
+            <li><a href="#entrypoint和cmd的联系和区别">ENTRYPOINT和CMD的联系和区别</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="安装">安装</h2>
+<h3 id="centos">Centos</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># step 1: 安装必要的一些系统工具</span>
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+<span class="c1"># Step 2: 添加软件源信息</span>
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+<span class="c1"># Step 3: 更新并安装 Docker-CE</span>
+sudo yum makecache fast
+sudo yum -y install docker-ce
+pip install docker-compose
+<span class="c1"># Step 4: 启动</span>
+sudo systemctl start docker
+sudo systemctl <span class="nb">enable</span> docker
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="ubuntu">Ubuntu</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># step 1: 安装必要的一些系统工具</span>
+sudo apt-get update
+sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+<span class="c1"># step 2: 安装GPG证书</span>
+curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -
+<span class="c1"># Step 3: 写入软件源信息</span>
+sudo add-apt-repository <span class="s2">&#34;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> stable&#34;</span>
+<span class="c1"># Step 4: 更新并安装 Docker-CE</span>
+sudo apt-get -y update
+sudo apt-get -y install docker-ce
+pip install docker-compose
+<span class="c1"># Step 5: 启动</span>
+sudo systemctl start docker
+sudo systemctl <span class="nb">enable</span> docker
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置">配置</h2>
+<h3 id="配置-docker-镜像">配置 docker 镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 自己申请阿里云https加速地址替换掉</span>
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <span class="s">&lt;&lt;-&#39;EOF&#39;
+</span><span class="s">{
+</span><span class="s">&#34;registry-mirrors&#34;: [&#34;https://6kbwr476.mirror.aliyuncs.com&#34;],
+</span><span class="s">&#34;log-driver&#34;:&#34;json-file&#34;,
+</span><span class="s">&#34;log-opts&#34;:{ &#34;max-size&#34; :&#34;100m&#34;,&#34;max-file&#34;:&#34;1&#34;}
+</span><span class="s">}
+</span><span class="s">EOF</span>
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="基本命令">基本命令</h2>
+<h3 id="拉取操作系统镜像">拉取操作系统镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker pull centos <span class="c1"># 镜像可以去docker hub中搜索自己需要的</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="镜像列表">镜像列表</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker images
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建网络">创建网络</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker network ls  <span class="c1"># 查看现在的网络</span>
+docker network create -d bridge mybridge <span class="c1"># 创建自己的bridge</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="普通模式运行镜像">普通模式运行镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker run --rm -dit --name pqcloud-web <span class="se">\ </span><span class="c1"># 创建容器名</span>
+    -p 8090:8080 <span class="se">\ </span><span class="c1"># 宿主机端口:容器内部端口</span>
+    --label aliyun.logs.pqcloud-web<span class="o">=</span>stdout <span class="se">\
+</span><span class="se"></span>    -h <span class="m">01</span> <span class="se">\ </span><span class="c1"># 容器Hostname</span>
+     registry.cn-hangzhou.aliyuncs.com/pqtel/pqcloud-web <span class="c1"># 远程拉取地址</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="容器和宿主机文件拷贝">容器和宿主机文件拷贝</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#从主机复制到容器</span>
+docker cp 宿主机路径 容器ID或Name:容器路径
+
+<span class="c1">#从容器复制到主机</span>
+docker cp 容器ID或Name:容器路径 宿主机路径
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="停止删除容器和镜像">停止、删除容器和镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 单个删除容器和镜像</span>
+docker stop id或name
+docker rm   id或name
+docker rmi  id或name
+<span class="c1"># 停止所有容器</span>
+docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
+<span class="c1"># 删除所有容器</span>
+docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span> <span class="p">&amp;</span> docker rm <span class="k">$(</span>docker ps -aq<span class="k">)</span>
+<span class="c1"># 删除全部容器和镜像</span>
+docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span> <span class="p">&amp;</span> docker rm <span class="k">$(</span>docker ps -aq<span class="k">)</span> <span class="p">&amp;</span> docker image prune -af
+<span class="c1"># 删除所有的无名镜像(会导致所有容器删除)</span>
+docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span> <span class="p">&amp;</span> docker rm <span class="k">$(</span>docker ps -aq<span class="k">)</span> <span class="p">&amp;</span> docker rmi <span class="k">$(</span>docker images -qf <span class="s2">&#34;dangling=true&#34;</span><span class="k">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="进入容器-shell">进入容器 Shell</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it 容器名 /bin/bash <span class="c1"># 有些容器没有bash只有sh</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="所有-docker-打印的日志收集存储到-elasticsearch">所有 docker 打印的日志收集存储到 Elasticsearch</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker run -dit <span class="se">\
+</span><span class="se"></span>    --rm registry.cn-hangzhou.aliyuncs.com/acs-sample/log-pilot <span class="se">\
+</span><span class="se"></span>    --restart<span class="o">=</span>always <span class="se">\
+</span><span class="se"></span>    --name log-pilot <span class="se">\
+</span><span class="se"></span>    -v /var/run/docker.sock:/var/run/docker.sock <span class="se">\
+</span><span class="se"></span>    -v /:/host <span class="se">\
+</span><span class="se"></span>    --privileged  <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">FLUENTD_OUTPUT</span><span class="o">=</span>elasticsearch <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">ELASTICSEARCH_HOST</span><span class="o">=</span>地址 <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">ELASTICSEARCH_PORT</span><span class="o">=</span>端口 <span class="se">\
+</span><span class="se"></span>    -h 主机名 <span class="se">\
+</span><span class="se"></span>    registry.cn-hangzhou.aliyuncs.com/acs-sample/log-pilot
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="注意点">注意点</h2>
+<h3 id="copy和add的联系和区别">COPY和ADD的联系和区别</h3>
+<p>联系:</p>
+<ol>
+<li>两者都能将文件和目录拷贝到镜像中</li>
+</ol>
+<p>区别:</p>
+<ol>
+<li>
+<p>ADD自动解压压缩文件到镜像中</p>
+</li>
+<li>
+<p>ADD能重URL中拷贝到镜像中但是不推荐，因为会创建更多的镜像层</p>
+</li>
+</ol>
+<h3 id="entrypoint和cmd的联系和区别">ENTRYPOINT和CMD的联系和区别</h3>
+<p>区别:
+ENTRYPOINT的作用不同, 如果你希望你的docker镜像只执行一个具体程序,
+不希望用户在执行docker run的时候随意覆盖默认程序. 建议用ENTRYPOINT</p>
+<p>使用:</p>
+<p>在写Dockerfile时, ENTRYPOINT或者CMD命令会自动覆盖之前的ENTRYPOINT或者CMD命令.
+在docker镜像运行时, 用户也可以在命令指定具体命令, 覆盖在Dockerfile里的命令.
+和CMD类似, 默认的ENTRYPOINT也在docker run时, 也可以被覆盖. 在运行时, 用&ndash;entrypoint覆盖默认的ENTRYPOINT</p>
+<p>写法:
+ENTRYPOINT和CMD指令支持2种不同的写法: shell表示法和exec表示法.
+当使用shell表示法时, 命令行程序作为sh程序的子程序运行, docker用/bin/sh -c的语法调用.
+PID为1的进程并不是在Dockerfile里面定义的ping命令, 而是/bin/sh命令. 如果从外部发送任何POSIX信号到docker容器,
+由于/bin/sh命令不会转发消息给实际运行的ping命令, 则不能安全得关闭docker容器</p>
+<p>永远使用Exec表示法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">CMD <span class="o">[</span><span class="s2">&#34;executable&#34;</span>,<span class="s2">&#34;param1&#34;</span>,<span class="s2">&#34;param2&#34;</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>组合使用:
+组合使用ENTRYPOINT和CMD, ENTRYPOINT指定默认的运行命令, CMD指定默认的运行参数</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">何年重遇天涯</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-07-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/bash/">Bash</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/configure/linux_conf/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Linux Configuration</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/programming/data_type/">
+            <span class="next-text nav-default">Data Type</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

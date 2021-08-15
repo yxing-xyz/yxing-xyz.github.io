@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Elisp - 何年重遇天涯</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="定义变量 全局变量 1 2 (setq a1 3) (defvar a1 3 &amp;#34;temp varlue&amp;#34;) ;; 多了一个变量描述字符串 C-h v能看到描述 局部变量 let中变量列表的赋值顺序是不定的，因此在第一个例子里 a3 无" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="/post/programming/elisp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Elisp" />
+<meta property="og:description" content="定义变量 全局变量 1 2 (setq a1 3) (defvar a1 3 &#34;temp varlue&#34;) ;; 多了一个变量描述字符串 C-h v能看到描述 局部变量 let中变量列表的赋值顺序是不定的，因此在第一个例子里 a3 无" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/programming/elisp/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-18T21:56:00+08:00" />
+<meta property="article:modified_time" content="2021-08-18T21:56:00+08:00" />
+
+<meta itemprop="name" content="Elisp">
+<meta itemprop="description" content="定义变量 全局变量 1 2 (setq a1 3) (defvar a1 3 &#34;temp varlue&#34;) ;; 多了一个变量描述字符串 C-h v能看到描述 局部变量 let中变量列表的赋值顺序是不定的，因此在第一个例子里 a3 无"><meta itemprop="datePublished" content="2021-08-18T21:56:00+08:00" />
+<meta itemprop="dateModified" content="2021-08-18T21:56:00+08:00" />
+<meta itemprop="wordCount" content="1173">
+<meta itemprop="keywords" content="Syntax,Elisp," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Elisp"/>
+<meta name="twitter:description" content="定义变量 全局变量 1 2 (setq a1 3) (defvar a1 3 &#34;temp varlue&#34;) ;; 多了一个变量描述字符串 C-h v能看到描述 局部变量 let中变量列表的赋值顺序是不定的，因此在第一个例子里 a3 无"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">何年重遇天涯</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About Me</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">何年重遇天涯</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About Me</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Elisp</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-18 </span>
+        <div class="post-category">
+            <a href="/categories/programming/"> Programming </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#定义变量">定义变量</a></li>
+        <li><a href="#基本类型">基本类型</a></li>
+        <li><a href="#复合类型">复合类型</a></li>
+        <li><a href="#控制结构">控制结构</a></li>
+        <li><a href="#逻辑语句">逻辑语句</a></li>
+        <li><a href="#循环语句">循环语句</a></li>
+        <li><a href="#函数">函数</a></li>
+        <li><a href="#修饰">修饰</a></li>
+        <li><a href="#宏">宏</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="定义变量">定义变量</h2>
+<ol>
+<li>全局变量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">a1</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">a1</span> <span class="mi">3</span> <span class="s">&#34;temp varlue&#34;</span><span class="p">)</span> <span class="c1">;; 多了一个变量描述字符串  C-h v能看到描述</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>局部变量
+let中变量列表的赋值顺序是不定的，因此在第一个例子里 a3 无法使用 a2 的值；而 let* 中后面变量的声明可以使用前面变量的值。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">a2</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="nv">a3</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">a3</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;%s %s&#34;</span> <span class="nv">a2</span> <span class="nv">a3</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">a2</span> <span class="mi">3</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">a3</span> <span class="nv">a2</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;%s %s&#34;</span> <span class="nv">a2</span> <span class="nv">a3</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="基本类型">基本类型</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="mi">3</span> <span class="c1">;; int</span>
+<span class="mf">3.5</span> <span class="c1">;; float</span>
+<span class="s">&#34;string&#34;</span> <span class="c1">;; string</span>
+<span class="no">t</span> <span class="c1">;; bool</span>
+<span class="no">nil</span> <span class="c1">;; 空 只有nil == (), 空表 nil是false</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复合类型">复合类型</h2>
+<p>基础的集合结构都由序对进行组成。
+**'**这个符号被称为引用符（quote）。它的作用是表示后面的表不立即求值，而把其当作一个字面值处理.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; 空表 false</span>
+<span class="o">&#39;</span><span class="p">()</span> <span class="nv">==</span> <span class="p">(</span><span class="k">quote</span> <span class="p">())</span> <span class="nv">==</span> <span class="no">nil</span>
+
+<span class="c1">;; 类似js的eval然后调用函数</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">testquote</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">+</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">apply</span> <span class="nv">testquote</span><span class="p">)</span> <span class="c1">;; 3</span>
+
+<span class="c1">;; cons 用于构建序对，car 用于取前面的元素，cdr 用于取后面的元素 (序对与 list 的区别就是 list 的最后一个元素为 nil)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">three</span> <span class="p">(</span><span class="nc">cons</span> <span class="mi">1</span> <span class="p">(</span><span class="nc">cons</span> <span class="mi">2</span> <span class="p">(</span><span class="nc">cons</span> <span class="mi">3</span> <span class="no">nil</span><span class="p">))))</span>
+<span class="c1">;; 等价于</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">three</span> <span class="p">(</span><span class="nc">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">))</span>
+
+
+<span class="c1">;; alist可以做map使用 lua php的关联数组和这个很像</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">color-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">red</span> <span class="o">.</span> <span class="s">&#34;ff0000&#34;</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nv">green</span> <span class="o">.</span> <span class="s">&#34;00ff00&#34;</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nv">blue</span> <span class="o">.</span> <span class="s">&#34;0000ff&#34;</span><span class="p">)))</span>
+<span class="p">(</span><span class="nf">car</span> <span class="nv">green-item</span><span class="p">)</span> <span class="c1">;; green </span>
+<span class="p">(</span><span class="nf">cdr</span> <span class="nv">green-item</span><span class="p">)</span> <span class="c1">;; &#34;00ff00&#34; </span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;color-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">green</span> <span class="o">.</span> <span class="s">&#34;00ff01&#34;</span><span class="p">))</span> <span class="nv">-&gt;</span> <span class="p">((</span><span class="nv">green</span> <span class="o">.</span> <span class="s">&#34;00ff01&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nv">red</span> <span class="o">.</span> <span class="s">&#34;ff0000&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nv">green</span> <span class="o">.</span> <span class="s">&#34;00ff00&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nv">blue</span> <span class="o">.</span> <span class="s">&#34;0000ff&#34;</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="ss">&#39;green</span> <span class="nv">color-alist</span><span class="p">))</span><span class="c1">;; &#34;00ff01&#34; </span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="控制结构">控制结构</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; 顺序</span>
+<span class="c1">;; (progn expr1 expr2 ...)</span>
+
+<span class="c1">;; 条件</span>
+<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">a2</span> <span class="mi">3</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="nv">a2</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">progn</span>
+        <span class="p">(</span><span class="k">setq</span> <span class="nv">a2</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;Right %s&#34;</span> <span class="nv">a2</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;Wrong %s&#34;</span> <span class="nv">a2</span><span class="p">)))</span>
+
+<span class="c1">;; when 没有else分支的if</span>
+<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">a2</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="nv">a2</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;hello&#34;</span><span class="p">)))</span>
+
+<span class="c1">;; unless 没有then分支的if</span>
+<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">a2</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">&lt;</span> <span class="nv">a2</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;hello&#34;</span><span class="p">)))</span>
+
+<span class="c1">;; cond 多条件语句 多条件语句，返回值为最后执行的语句。</span>
+
+<span class="c1">;; (cond ((test1 body11 body12 ...)</span>
+<span class="c1">;;       (test2 body21 body22 ...)</span>
+<span class="c1">;;       ...</span>
+<span class="c1">;;       (t bodyn1 bodyn2 ...)))    </span>
+<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">a4</span> <span class="mi">4</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">cond</span> <span class="p">((</span><span class="nf">&gt;</span> <span class="nv">a4</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;1&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;&gt;&#34;</span><span class="p">))</span>
+        <span class="p">((</span><span class="nf">=</span> <span class="nv">a4</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;1&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;=&#34;</span><span class="p">))</span>
+        <span class="p">((</span><span class="nf">&lt;</span> <span class="nv">a4</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;1&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;&lt;&#34;</span><span class="p">))))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="逻辑语句">逻辑语句</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; and 会顺序执行表达式，直到遇到 nil。所以返回值为 nil 或者最后一个语句。通常，</span>
+<span class="c1">;; (if expr1</span>
+<span class="c1">;;     (if expr2</span>
+<span class="c1">;;        ..</span>
+<span class="c1">;;    (if exprn-1 exprn)))</span>
+<span class="c1">;; 简写作</span>
+<span class="c1">;; (and expr1 exp2 ...)</span>
+
+
+<span class="c1">;; or 会顺序执行表达式，直到遇到一个非 nil。所以返回值为第一个非 nil 的值。</span>
+<span class="c1">;; (if a a b)</span>
+<span class="c1">;; 简写作</span>
+<span class="c1">;; (or a b)</span>
+
+<span class="c1">;; not 为非： </span>
+<span class="c1">;; (not expr)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="循环语句">循环语句</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; while 返回值为 nil。</span>
+<span class="c1">;; (while test</span>
+<span class="c1">;;   body1 body2 ...)</span>
+<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nf">count</span> <span class="mi">3</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">while</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="nf">count</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;%d&#34;</span> <span class="nf">count</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nf">count</span> <span class="p">(</span><span class="nf">1-</span> <span class="nf">count</span><span class="p">))))</span>
+
+<span class="c1">;; elisp 提供了更方便的对 list 的遍历方法，返回值为 nil。</span>
+<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">templist</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">var</span> <span class="nv">templist</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;%d&#34;</span> <span class="nv">var</span><span class="p">)))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="函数">函数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">func1</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;hello&#34;</span><span class="p">)))</span>
+<span class="p">(</span><span class="nf">funcall</span> <span class="nv">func1</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">func1</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;hello&#34;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">func1</span><span class="p">)</span> <span class="c1">;; -&gt; &#34;hello&#34;</span>
+
+<span class="c1">;; 一个常见的 defun 是这样的。第一个元素为函数名，后面的列表是参数列表，参数可以使用&amp;rest 和&amp;optional 修饰；下面有一个可选的文档字符串以及一个可选的声明列表，最常见的就是 (interactive)，表示这个函数是一个可交互的函数，即用户可以通过关联快捷键或者 M-x 的方式直接调用该函数。对于不需要名字的函数，可以使用 lambda 表达式：</span>
+<span class="p">(</span><span class="nv">bind-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c C-1&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;hello&#34;</span><span class="p">))</span> <span class="nv">global-map</span><span class="p">)</span>
+
+<span class="c1">;; &amp;rest: 多个参数 可变参数 类似golang ...</span>
+<span class="c1">;; &amp;optional:可选参数，可填或忽略，默认nil</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="修饰">修饰</h2>
+<p>类似java的动态代理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">example-func</span> <span class="p">(</span><span class="nv">p1</span> <span class="nv">p2</span> <span class="nv">p3</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">message</span> <span class="s">&#34;%d %d %d&#34;</span> <span class="nv">p1</span> <span class="nv">p2</span> <span class="nv">p3</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">example-advice</span> <span class="p">(</span><span class="nv">oldfunc</span> <span class="k">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">setcar</span> <span class="p">(</span><span class="nf">nthcdr</span> <span class="mi">1</span> <span class="nv">args</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">apply</span> <span class="nv">oldfunc</span> <span class="nv">args</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">example-func</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1">;; -&gt; &#34;1 2 3&#34;</span>
+
+<span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;example-func</span> <span class="ss">:around</span> <span class="ss">&#39;example-advice</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">example-func</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1">;; -&gt; &#34;1 0 3&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="宏">宏</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">何年重遇天涯</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-08-18
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank">Creative Commons Attribution-ShareAlike License</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/syntax/">Syntax</a>
+          <a href="/tags/elisp/">Elisp</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/devops/note/">
+            <span class="next-text nav-default">运维笔记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

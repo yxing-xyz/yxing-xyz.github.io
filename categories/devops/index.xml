@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevOps on 何年重遇天涯</title>
+    <link>/categories/devops/</link>
+    <description>Recent content in DevOps on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 10 Jul 2021 12:32:00 +0800</lastBuildDate><atom:link href="/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>运维笔记</title>
+      <link>/post/devops/note/</link>
+      <pubDate>Sat, 10 Jul 2021 12:32:00 +0800</pubDate>
+      
+      <guid>/post/devops/note/</guid>
+      <description>基础 du和df空间不一致: 1. rm删除文件inode节点被进程打开内核不会释放空间. 2. mount挂载非空目录隐藏了原磁盘导致du并没有统计这部</description>
+    </item>
+    
+    <item>
+      <title>Bash Utils</title>
+      <link>/post/devops/bash_utils/</link>
+      <pubDate>Wed, 16 Jun 2021 20:00:00 +0800</pubDate>
+      
+      <guid>/post/devops/bash_utils/</guid>
+      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &amp;#34;*.log&amp;#34; -type f -size 1M</description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>/post/devops/docker/</link>
+      <pubDate>Thu, 21 Jun 2018 14:55:46 +0800</pubDate>
+      
+      <guid>/post/devops/docker/</guid>
+      <description>安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose</description>
+    </item>
+    
+  </channel>
+</rss>

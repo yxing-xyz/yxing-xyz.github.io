@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redis on 何年重遇天涯</title>
+    <link>/tags/redis/</link>
+    <description>Recent content in Redis on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Oct 2020 10:16:00 +0800</lastBuildDate><atom:link href="/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis notes</title>
+      <link>/post/programming/redis_note/</link>
+      <pubDate>Fri, 16 Oct 2020 10:16:00 +0800</pubDate>
+      
+      <guid>/post/programming/redis_note/</guid>
+      <description>Redis notes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 连接 redis-cli -h host -p port -a &amp;#39;password&amp;#39; # 地图经纬度半径查询 GEORADIUS SHOP:COORDINATES 112.936512 28.210319 5000 m WITHCOORD WITHDIST COUNT 20 ASC # 模糊搜索KEY KEYS user_id_* # 模糊清楚KEY redis-cli -h &amp;#39;host&amp;#39; -p port</description>
+    </item>
+    
+  </channel>
+</rss>

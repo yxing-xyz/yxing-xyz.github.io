@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Golang Note - 何年重遇天涯</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="/post/programming/golang_note/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Golang Note" />
+<meta property="og:description" content="Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/programming/golang_note/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-08-05T23:08:00+08:00" />
+<meta property="article:modified_time" content="2021-07-22T14:28:00+08:00" />
+
+<meta itemprop="name" content="Golang Note">
+<meta itemprop="description" content="Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e"><meta itemprop="datePublished" content="2020-08-05T23:08:00+08:00" />
+<meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
+<meta itemprop="wordCount" content="4091">
+<meta itemprop="keywords" content="Syntax,Golang," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang Note"/>
+<meta name="twitter:description" content="Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">何年重遇天涯</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About Me</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">何年重遇天涯</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About Me</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Golang Note</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-05 </span>
+        <div class="post-category">
+            <a href="/categories/programming/"> Programming </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#golang-知识点">Golang 知识点</a></li>
+        <li><a href="#重点语法">重点语法</a>
+          <ul>
+            <li><a href="#golang中的比较">golang中的比较</a></li>
+            <li><a href="#golan静态链接">golan静态链接</a></li>
+            <li><a href="#切片的删除">切片的删除</a></li>
+            <li><a href="#golang-阻塞">Golang 阻塞</a></li>
+            <li><a href="#定时器">定时器</a></li>
+            <li><a href="#关闭channel">关闭channel</a></li>
+            <li><a href="#文件读写">文件读写</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="golang-知识点">Golang 知识点</h2>
+<ul>
+<li><strong>声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="kt">int</span>
+<span class="kd">var</span> <span class="nx">d</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="nx">d</span><span class="p">,</span> <span class="nx">e</span> <span class="o">:=</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#34;213&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>全局变量只能用 var 定义可以省略类型,不能用短命名法</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">A</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="kd">var</span> <span class="nx">B</span> <span class="p">=</span> <span class="mi">1</span> <span class="c1">// 自动推断
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>常量不能重新赋值,不能调用函数因编译期确定,常量有无类型关联默认类型常量如常量字符串,常量 bool,常量数字,也可以带类型常量,带类型常量就不能赋值给别名类型赋值</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">const</span> <span class="nx">A</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="kd">const</span> <span class="nx">C</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">2</span>
+<span class="kd">const</span> <span class="nx">B</span> <span class="p">=</span> <span class="nf">test</span><span class="p">()</span> <span class="c1">// error, 常量是编译期确定
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="kt">int</span><span class="p">{</span>
+	<span class="k">return</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">A</span> <span class="p">=</span> <span class="mi">12313</span> <span class="c1">// error, 常量不能赋值
+</span><span class="c1"></span>
+	<span class="kd">type</span> <span class="nx">MyInt</span> <span class="kt">int</span>
+
+	<span class="kd">var</span> <span class="nx">b</span> <span class="nx">MyInt</span> <span class="p">=</span> <span class="nx">A</span> <span class="c1">// ok, 因为A是无类型关联int类型
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">b</span> <span class="nx">MyInt</span> <span class="p">=</span> <span class="nx">C</span> <span class="c1">// error报错因为,常量有类型,类型不一样不能赋值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>iota只能和const使用,iota每次都使值从0开始</strong></p>
+</li>
+<li>
+<p><strong>同一个包里面函数名,接口名,结构体名,全局变量,全局常量不能重名</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">A</span><span class="p">(){}</span> <span class="c1">// error
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">A</span> <span class="kd">interface</span><span class="p">{}</span> <span class="c1">// error
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">A</span> <span class="kd">struct</span><span class="p">{}</span> <span class="c1">// error
+</span><span class="c1"></span><span class="kd">const</span> <span class="nx">A</span> <span class="c1">// error
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">A</span> <span class="kt">int</span> <span class="c1">// errro
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>包中可以包含多个 init 函数，先执行导入包的 init 函数，然后 main 包 init，然后 main 函数</strong></p>
+</li>
+<li>
+<p><strong>main函数不能带参数，不能有返回值，且必须在 main 包中</strong></p>
+</li>
+<li>
+<p><strong>同一个文件夹中包名只能有一个,不能出现多个</strong></p>
+</li>
+<li>
+<p><strong>函数和成员和方法名大小写决定包外可见行类似 public 和 private</strong></p>
+</li>
+<li>
+<p><strong>函数返回值如果只有一个类型,可以只写类型，如果多个类型必须括号包裹起来，如果返回值中有一命名返回值，其余参数必须全部命名</strong></p>
+</li>
+<li>
+<p><strong>chan, map, slice需要make初始化才能用, slice可以用apend初始化</strong></p>
+</li>
+<li>
+<p><strong>delete函数用来删除map键值</strong></p>
+</li>
+<li>
+<p><strong>当切片达到cap容量时继续append 会扩大 cap，小于 1024 会按照 2 倍，超过会 1.25 倍递增扩容</strong></p>
+</li>
+<li>
+<p><strong>append超过cap返回扩容的新切片，否则返回旧切片</strong></p>
+</li>
+<li>
+<p><strong>cap 函数适用数组、切片、通道</strong></p>
+</li>
+<li>
+<p><strong>给 nil chan 发送接收都会导致阻塞，可以用来阻塞 main 协程</strong></p>
+</li>
+<li>
+<p><strong>select随机选取通道执行一次用来处理通道 io，除了defalt其他都必须读写 chan,空select阻塞协程</strong></p>
+</li>
+<li>
+<p><strong>if语句块会遮挡外部定义的变量如命名返回值,导致 bug 所以变量尽量定义到外面</strong></p>
+</li>
+<li>
+<p><strong>switch的case条件中能出现多个结果选项</strong></p>
+</li>
+<li>
+<p><strong>fallthrough不能在代码中间只有明确fallthrough才自动执行下一个且不经过case的判断</strong></p>
+</li>
+<li>
+<p><strong>如果switch不为空则case只能比较相等，如果 switch为空则case能写条件判断</strong></p>
+</li>
+<li>
+<p><strong>for 循环不支持逗号隔开赋值，只支持平行赋值</strong></p>
+</li>
+<li>
+<p><strong>for range里面的闭包和协程很容易出错因为使用副本和指向地址没改变</strong></p>
+</li>
+<li>
+<p><strong>type 新类型 类型这种方式可以挂方法,type 别名 = 也类似宏定义,不能在包外挂方法,这是和 type 类型的区别, 可以通过类型转换新类型和旧类型</strong></p>
+</li>
+<li>
+<p><strong>两个接口拥有相同的方法列表，方法次序可以不同，那么他们就是等价可以相互赋值，接口 A 是接口 B 的子级，B 可以赋值给 A</strong></p>
+</li>
+<li>
+<p><strong>类型实现接口函数就实现了接口, 类型实现接口如果方法接受者是指针,那么接口变量只能是存储这个类型的指针</strong></p>
+</li>
+<li>
+<p><strong>除了nil任何值赋值给接口那么这个接口不再是nil,即使是一个nil初始值的引用类型</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">a</span> <span class="p">[]</span><span class="kt">int</span> <span class="c1">// a是nil
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">c</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="nx">a</span> <span class="c1">// c不是nil,引用了a
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>switch type 和.(类型)判断只能是接口变量才能编译通过,因为只有接口实际隐藏了变量的其他类型只保留接口方法调用相等于泛化了</strong></p>
+</li>
+<li>
+<p><strong>panic 只能本协程栈层层返回,所以为了不让程序崩溃, web协程最好 defer recover 恢复 panic, 多次panic只有最后一个panic被recover</strong></p>
+</li>
+<li>
+<p><strong>defer后进先出栈结构,执行在return 之前</strong></p>
+</li>
+</ul>
+<h2 id="重点语法">重点语法</h2>
+<h3 id="golang中的比较">golang中的比较</h3>
+<ul>
+<li>
+<p><strong>golang可比较又可以分为两个小类:1. 可比较，包括相等(==)，和不相等(!=). 2.可排序，包括大于(&gt;)，大于等于(&gt;=)，小于(&gt;)，小于等于(&lt;=)</strong></p>
+</li>
+<li>
+<p><strong>可排序的数据类型三种: 整形, 浮点数, 字符串</strong></p>
+</li>
+<li>
+<p><strong>可比较的数据类型: 可排序的类型, 布尔类型, 复数, array, struct, 通道, 接口, 指针</strong></p>
+</li>
+<li>
+<p><strong>不可比较类型: func, map, slice, 不能和自身类型比较编译不过，结构体和数组存储这些类型的也编译不过, 用空接口强行比较运行会panic</strong></p>
+</li>
+<li>
+<p><strong>不是单纯比较变量寄存器的值, 这点和c语言和java不一样,c和java以字符串举例都是一个寄存器变量对应一个复合结构,比较只会比较寄存器的值是否相同, 这样就会导致同样的字符串却不想等,所以c需要用strcmp而java需要用equal方法, golang的==做了很多操作,更加偏上层和脚本语言.</strong></p>
+</li>
+<li>
+<p><strong>不同类型的比较会编译不过去, 注意不同名称接口如果内部方法一模一样是同类型, 用接口接收比较会先比较类型,然后比较类型的值,如果类型不可比较类型会panic</strong></p>
+</li>
+</ul>
+<h3 id="golan静态链接">golan静态链接</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">go build -ldflags <span class="s1">&#39;-linkmode &#34;external&#34; -extldflags &#34;-static&#34;&#39;</span> .
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="切片的删除">切片的删除</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">RemoveFromStart</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+	<span class="nf">RemoveFromTail</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+	<span class="nf">RemoveFromMiddle</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">RemoveFromStart</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;第一种方式.移动数据指针性能生成切片赋值给原变量. 性能最好,而且省内存,未动原内存不影响其他切片或者底层数组&#34;</span><span class="p">)</span>
+	<span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">a</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+		<span class="nx">a</span> <span class="p">=</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;第二种方式.apend直接将底层的数据结构向开头移动生成新的切片赋值给原变量. 只拷贝操作，只是省内存,移动底层结构会影响其他切片和数组&#34;</span><span class="p">)</span>
+	<span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">a</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+		<span class="nx">a</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">0</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span> <span class="c1">//appen能初始化切片不一定需要make初始化
+</span><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;第三种方式.copy同append只拷贝到开头，最后需要再切片一次保证底层的切片长度,然后赋值给原变量。优点同append&#34;</span><span class="p">)</span>
+	<span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">a</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+		<span class="nx">a</span> <span class="p">=</span> <span class="nx">a</span><span class="p">[:</span><span class="nb">copy</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="p">}()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;总结：第二第三种都能重新用新切片代替，避免移动了影响到其他切片或者底层数组&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">RemoveFromTail</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;总结：原理和从开头删除一致，参数位置，参数不同罢了&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">RemoveFromMiddle</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;第一种方式.apend直接将底层的数据结构向开头移动生成新的切片赋值给原变量. 只拷贝操作，只是省内存,移动底层结构会影响其他切片和数组&#34;</span><span class="p">)</span>
+	<span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">a</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+		<span class="nx">a</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span> <span class="c1">//appen能初始化切片不一定需要make初始化
+</span><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;第二种方式.copy同append只拷贝移动后面部分，最后需要再切片一次保证底层的切片长度,然后赋值给原变量。优点同append&#34;</span><span class="p">)</span>
+	<span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">a</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+		<span class="nx">a</span> <span class="p">=</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="mi">2</span><span class="o">+</span><span class="nb">copy</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:])]</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;总结：必须移动后面的到中间去&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="golang-阻塞">Golang 阻塞</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 1.死循环
+</span><span class="c1"></span>	<span class="k">for</span> <span class="p">{}</span>
+
+<span class="c1">// 2.空select
+</span><span class="c1"></span>	<span class="k">select</span><span class="p">{}</span>
+
+<span class="c1">// 3.空chan,nil chan
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">c</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+	<span class="nx">c</span><span class="o">&lt;-</span> <span class="c1">// 空chan直到有输入,同步阻塞
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">d</span> <span class="kd">chan</span> <span class="kt">int</span>
+	<span class="nx">d</span><span class="o">&lt;-</span> <span class="c1">// nil chan 永远阻塞
+</span><span class="c1"></span>
+<span class="c1">// 4.sync.Mutex
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">m</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+	<span class="nx">m</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+	<span class="nx">m</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+
+<span class="c1">// 5.sync.WaitGroup
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+	<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+
+<span class="c1">// 5.sync.cond条件变量
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">cond</span> <span class="p">=</span> <span class="nx">sync</span><span class="p">.</span><span class="nf">NewCond</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span><span class="p">))</span>
+	<span class="k">go</span> <span class="kd">func</span><span class="p">(){</span>
+		<span class="nx">cond</span><span class="p">.</span><span class="nx">L</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span> <span class="c1">//获取锁
+</span><span class="c1"></span>		<span class="c1">// 只有一个协程执行两者之间代码中,到了cond.wait释放了锁,其他协程都能抢占执行这部分中间代码
+</span><span class="c1"></span>		<span class="nx">cond</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span> <span class="c1">//等待通知,里面继续抢互斥锁
+</span><span class="c1"></span>		<span class="c1">// 收到通知的程序执行代码,同样只有一个协程能执行这段代码,其他收到通知抢占进入执行
+</span><span class="c1"></span>		<span class="nx">cond</span><span class="p">.</span><span class="nx">L</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span> <span class="c1">//释放锁
+</span><span class="c1"></span>	<span class="p">}()</span>
+	<span class="nx">cond</span><span class="p">.</span><span class="nf">Signal</span><span class="p">()</span>    <span class="c1">// 唤醒一个cond继续执行
+</span><span class="c1"></span>	<span class="nx">cond</span><span class="p">.</span><span class="nf">Broadcast</span><span class="p">()</span> <span class="c1">// 唤醒所有的阻塞的cond
+</span><span class="c1"></span>
+<span class="c1">// 6.os.Signal
+</span><span class="c1"></span>	<span class="nx">sig</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Signal</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nx">signal</span><span class="p">.</span><span class="nf">Notify</span><span class="p">(</span><span class="nx">sig</span><span class="p">,</span> <span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGTERM</span><span class="p">,</span> <span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGINT</span><span class="p">)</span>
+    <span class="o">&lt;-</span><span class="nx">sig</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="定时器">定时器</h3>
+<p>golang中定时器有三种实现方式，分别是time.sleep、time.after、time.Timer其中time.after和time.Timer需要对通道进行释放才能达到定时的效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/*
+</span><span class="cm">        用sleep实现定时器
+</span><span class="cm">    */</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">())</span>
+    <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">())</span>
+
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="nx">timer</span><span class="p">.</span><span class="nx">C</span><span class="p">)</span>
+    <span class="cm">/*
+</span><span class="cm">        用after实现定时器
+</span><span class="cm">    */</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">))</span>
+
+
+    <span class="c1">// 重置定时器 timer.Reset(d Duration) 过了d时间然后出通道执行后打代码
+</span><span class="c1"></span>    <span class="c1">// 停止定时器 timer.Stop()
+</span><span class="c1"></span>    <span class="cm">/*
+</span><span class="cm">        用timer实现定时器
+</span><span class="cm">    */</span>
+    <span class="nx">timer</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTimer</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="关闭channel">关闭channel</h3>
+<p>接受端和发送端都可以关闭通道,一般来说都是在发送端关闭,因为接收端能读取到通道已经关闭的状态.因为只需要注意:</p>
+<ol>
+<li>通道重复关闭会panic</li>
+<li>通道关闭后,从通道读取会返回false状态</li>
+</ol>
+<h4 id="1个发送者n个接收者">1个发送者N个接收者,</h4>
+<p>N取值1..N, 直接在发送端关闭即可.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">notify</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+
+	<span class="nx">datach</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="o">&lt;-</span><span class="nx">notify</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;2 秒后接受到信号开始发送&#34;</span><span class="p">)</span>
+		<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+			<span class="nx">datach</span> <span class="o">&lt;-</span> <span class="nx">i</span>
+		<span class="p">}</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;发送端关闭数据通道&#34;</span><span class="p">)</span>
+		<span class="nb">close</span><span class="p">(</span><span class="nx">datach</span><span class="p">)</span>
+	<span class="p">}()</span>
+
+	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;开始通知发送信息&#34;</span><span class="p">)</span>
+	<span class="nx">notify</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;通知1秒后接收到数据通道数据 &#34;</span><span class="p">)</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">datach</span><span class="p">;</span> <span class="nx">ok</span> <span class="p">{</span>
+			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;接收不到数据中止循环&#34;</span><span class="p">)</span>
+			<span class="k">break</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="文件读写">文件读写</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;bufio&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;io&#34;</span>
+	<span class="s">&#34;io/ioutil&#34;</span>
+	<span class="s">&#34;os&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// import &#34;github.com/gin-gonic/gin&#34;
+</span><span class="c1"></span>
+<span class="kd">func</span> <span class="nf">chekErr</span><span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// 第一种
+</span><span class="c1"></span>	<span class="nx">fd</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="s">&#34;./a&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_TRUNC</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_WRONLY</span><span class="p">,</span> <span class="mo">0666</span><span class="p">)</span>
+	<span class="nf">chekErr</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="nx">n</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">fd</span><span class="p">.</span><span class="nf">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;file.Write\n&#34;</span><span class="p">))</span>
+	<span class="nf">chekErr</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;第一种写入字节: %d\n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+
+    <span class="c1">// 第二种: ioutil是包装os调用os.WriteFile调用os.OpenFile固定参数O_WRONLY|O_CREATE|O_TRUNC会清空文件,然后调用File的方法
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="s">&#34;./b&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;ioutil.WriteFile\n&#34;</span><span class="p">),</span> <span class="mo">0666</span><span class="p">)</span>
+	<span class="nf">chekErr</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+
+	<span class="c1">// 第三种: 也是调用file.Write，File实现了接口WriteString,调用这个接口方法
+</span><span class="c1"></span>	<span class="nx">n</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">io</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="nx">fd</span><span class="p">,</span> <span class="s">&#34;io.WriteString\n&#34;</span><span class="p">)</span>
+	<span class="nf">chekErr</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;第二种写入字节: %d\n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+
+	<span class="c1">// 第四种: bufio.NewWriter包装file
+</span><span class="c1"></span>	<span class="nx">w</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewWriter</span><span class="p">(</span><span class="nx">fd</span><span class="p">)</span>
+	<span class="nx">n</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">w</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;bufio.Writer\n&#34;</span><span class="p">)</span>
+	<span class="nf">chekErr</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;第三种写入字节: %d\n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+	<span class="nx">w</span><span class="p">.</span><span class="nf">Flush</span><span class="p">()</span>
+
+	<span class="c1">// sync函数只是将所有修改过的块缓冲区排入写队列，然后就返回，它并不等待实际写磁盘操作结束。
+</span><span class="c1"></span>
+	<span class="c1">// fsync函数只对由文件描述符filedes指定的单一文件起作用，并且等待写磁盘操作结束，然后返回。fsync可用于数据库这样的应用程序，
+</span><span class="c1"></span>	<span class="c1">// 这种应用程序需要确保将修改过的块立即写到磁盘上。
+</span><span class="c1"></span>
+	<span class="c1">// fdatasync函数类似于fsync，但它只影响文件的数据部分。而除数据外，fsync还会同步更新文件的属性。
+</span><span class="c1"></span>
+	<span class="nx">fd</span><span class="p">.</span><span class="nf">Sync</span><span class="p">()</span>
+	<span class="nx">fd</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+	
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">何年重遇天涯</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-07-22
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank">Creative Commons Attribution-ShareAlike License</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/syntax/">Syntax</a>
+          <a href="/tags/golang/">Golang</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/linux/su_sudo/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">The difference between su and sudo in Linux</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/programming/c_macro_definition/">
+            <span class="next-text nav-default">C macro definition</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

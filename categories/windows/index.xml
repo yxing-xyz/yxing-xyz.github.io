@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on 何年重遇天涯</title>
+    <link>/categories/windows/</link>
+    <description>Recent content in Windows on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 05 May 2020 17:00:05 +0800</lastBuildDate><atom:link href="/categories/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows Utils</title>
+      <link>/post/win/win_utils/</link>
+      <pubDate>Tue, 05 May 2020 17:00:05 +0800</pubDate>
+      
+      <guid>/post/win/win_utils/</guid>
+      <description>CMD关闭防火墙 要用超级管理权限执行 1 2 3 4 ::注释 关闭所有防火墙 netsh advfirewall set allprofiles state off ::注释 查看防火墙的状态 netsh advfirewall show allprofiles CMD启动远程桌面 要用超级管理</description>
+    </item>
+    
+  </channel>
+</rss>

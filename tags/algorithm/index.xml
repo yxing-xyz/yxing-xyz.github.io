@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on 何年重遇天涯</title>
+    <link>/tags/algorithm/</link>
+    <description>Recent content in Algorithm on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Oct 2020 15:28:00 +0800</lastBuildDate><atom:link href="/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Map electronic fence</title>
+      <link>/post/algorithm/map_electronic_fence/</link>
+      <pubDate>Fri, 16 Oct 2020 15:28:00 +0800</pubDate>
+      
+      <guid>/post/algorithm/map_electronic_fence/</guid>
+      <description>地图围栏算法 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64</description>
+    </item>
+    
+    <item>
+      <title>Character Set Conversion</title>
+      <link>/post/algorithm/character_set_conversion/</link>
+      <pubDate>Wed, 06 May 2020 22:17:49 +0800</pubDate>
+      
+      <guid>/post/algorithm/character_set_conversion/</guid>
+      <description>Unicode to UTF8 1 2 3 4 5 6 7 8 9 | Unicode符号范围 | UTF-8编码方式 n | (十六进制) | (二进制) ---+-----------------------+------------------------------------------------------ 1 | 0000 0000 - 0000 007F | 0xxxxxxx 2 | 0000 0080 - 0000 07FF | 110xxxxx 10xxxxxx 3 |</description>
+    </item>
+    
+    <item>
+      <title>Bitwise Operation</title>
+      <link>/post/algorithm/bitwise_operator/</link>
+      <pubDate>Thu, 23 Nov 2017 11:28:03 +0800</pubDate>
+      
+      <guid>/post/algorithm/bitwise_operator/</guid>
+      <description>基础 符号 描述 运算规则 &amp;amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &amp;lt;&amp;lt; 按位左移 各二进制位全部左移若干位，高位</description>
+    </item>
+    
+  </channel>
+</rss>

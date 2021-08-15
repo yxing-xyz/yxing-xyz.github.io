@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MarkDown on 何年重遇天涯</title>
+    <link>/tags/markdown/</link>
+    <description>Recent content in MarkDown on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MarkDown语法测试</title>
+      <link>/post/test/</link>
+      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/test/</guid>
+      <description>标题 1 2 3 4 5 6 # 一级标题 ## 二级标题 ### 三级标题 #### 四级标题 ##### 五级标题 ###### 六级标题 段落格式 1 2 3 4 5 6 *斜体文本* _斜体文本_ **粗体文本** __</description>
+    </item>
+    
+  </channel>
+</rss>

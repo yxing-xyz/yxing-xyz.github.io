@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bash on 何年重遇天涯</title>
+    <link>/tags/bash/</link>
+    <description>Recent content in Bash on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 16 Jun 2021 20:00:00 +0800</lastBuildDate><atom:link href="/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bash Utils</title>
+      <link>/post/devops/bash_utils/</link>
+      <pubDate>Wed, 16 Jun 2021 20:00:00 +0800</pubDate>
+      
+      <guid>/post/devops/bash_utils/</guid>
+      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &amp;#34;*.log&amp;#34; -type f -size 1M</description>
+    </item>
+    
+    <item>
+      <title>Ajax Cors</title>
+      <link>/post/programming/ajax_cors/</link>
+      <pubDate>Wed, 16 Jun 2021 19:49:00 +0800</pubDate>
+      
+      <guid>/post/programming/ajax_cors/</guid>
+      <description>Ajax SIMPLE 1 2 3 4 5 6 7 curl -i -X GET \ -H &amp;#34;Sec-Fetch-Mode:cors&amp;#34; \ -H &amp;#34;Sec-Fetch-Site:cross-site&amp;#34; \ -H &amp;#34;Sec-Fetch-Dest:empty&amp;#34; \ -H &amp;#34;Referer:https://www.baidu.com/&amp;#34; \ -H &amp;#34;Origin:https://www.baidu.com&amp;#34; \ &amp;#39;https://test.juewei.com/a-service&amp;#39; OPTIONS 1 2 3 4 5 6 7 8 9 curl -i -X OPTIONS \ -H &amp;#34;Sec-Fetch-Mode:cors&amp;#34; \ -H &amp;#34;Sec-Fetch-Site:cross-site&amp;#34; \ -H &amp;#34;Sec-Fetch-Dest:empty&amp;#34; \ -H &amp;#34;Referer:https://www.baidu.com/&amp;#34; \ -H &amp;#34;Origin:https://www.baidu.com&amp;#34; \ -H &amp;#34;Access-Control-Request-Method:GET&amp;#34; \ -H &amp;#34;Access-Control-Request-Headers:x-b3-sampled&amp;#34; \ &amp;#39;https://test.juewei.com/a-service&amp;#39; 1 2 3</description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>/post/devops/docker/</link>
+      <pubDate>Thu, 21 Jun 2018 14:55:46 +0800</pubDate>
+      
+      <guid>/post/devops/docker/</guid>
+      <description>安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose</description>
+    </item>
+    
+  </channel>
+</rss>

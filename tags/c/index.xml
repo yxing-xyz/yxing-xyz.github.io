@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on 何年重遇天涯</title>
+    <link>/tags/c/</link>
+    <description>Recent content in C on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 14 May 2020 20:06:39 +0800</lastBuildDate><atom:link href="/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C macro definition</title>
+      <link>/post/programming/c_macro_definition/</link>
+      <pubDate>Thu, 14 May 2020 20:06:39 +0800</pubDate>
+      
+      <guid>/post/programming/c_macro_definition/</guid>
+      <description>Get structure member offset bytes You only need to include &amp;lt;stddef.h&amp;gt; to use offset or write the following code 1 #define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) &amp;lt;stdbool.h&amp;gt; You can use Booleans as long as you include &amp;lt;stdbool.h&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #ifndef _STDBOOL #define _STDBOOL #define __bool_true_false_are_defined 1 #ifndef __cplusplus #define bool _Bool #define false 0 #define true 1 #endif</description>
+    </item>
+    
+    <item>
+      <title>Data Type</title>
+      <link>/post/programming/data_type/</link>
+      <pubDate>Mon, 18 Jun 2018 15:20:41 +0800</pubDate>
+      
+      <guid>/post/programming/data_type/</guid>
+      <description>C 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 整形: short int long 数值类型: 浮点类型: float double 基本数据类型: 字符类型: char 空类型(void) 指针类型 构</description>
+    </item>
+    
+  </channel>
+</rss>

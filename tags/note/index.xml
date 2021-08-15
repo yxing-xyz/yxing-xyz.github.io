@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>note on 何年重遇天涯</title>
+    <link>/tags/note/</link>
+    <description>Recent content in note on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 10 Jul 2021 12:32:00 +0800</lastBuildDate><atom:link href="/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>运维笔记</title>
+      <link>/post/devops/note/</link>
+      <pubDate>Sat, 10 Jul 2021 12:32:00 +0800</pubDate>
+      
+      <guid>/post/devops/note/</guid>
+      <description>基础 du和df空间不一致: 1. rm删除文件inode节点被进程打开内核不会释放空间. 2. mount挂载非空目录隐藏了原磁盘导致du并没有统计这部</description>
+    </item>
+    
+  </channel>
+</rss>

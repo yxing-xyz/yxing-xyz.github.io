@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 何年重遇天涯</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 18 Aug 2021 21:56:00 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programming</title>
+      <link>/categories/programming/</link>
+      <pubDate>Wed, 18 Aug 2021 21:56:00 +0800</pubDate>
+      
+      <guid>/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>/categories/devops/</link>
+      <pubDate>Sat, 10 Jul 2021 12:32:00 +0800</pubDate>
+      
+      <guid>/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>/categories/linux/</link>
+      <pubDate>Tue, 08 Dec 2020 16:28:00 +0800</pubDate>
+      
+      <guid>/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>/categories/algorithm/</link>
+      <pubDate>Fri, 16 Oct 2020 15:28:00 +0800</pubDate>
+      
+      <guid>/categories/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>/categories/windows/</link>
+      <pubDate>Tue, 05 May 2020 17:00:05 +0800</pubDate>
+      
+      <guid>/categories/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Configure</title>
+      <link>/categories/configure/</link>
+      <pubDate>Mon, 04 May 2020 12:00:00 +0800</pubDate>
+      
+      <guid>/categories/configure/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

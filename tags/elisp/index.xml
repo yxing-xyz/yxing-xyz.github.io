@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elisp on 何年重遇天涯</title>
+    <link>/tags/elisp/</link>
+    <description>Recent content in Elisp on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 18 Aug 2021 21:56:00 +0800</lastBuildDate><atom:link href="/tags/elisp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Elisp</title>
+      <link>/post/programming/elisp/</link>
+      <pubDate>Wed, 18 Aug 2021 21:56:00 +0800</pubDate>
+      
+      <guid>/post/programming/elisp/</guid>
+      <description>定义变量 全局变量 1 2 (setq a1 3) (defvar a1 3 &amp;#34;temp varlue&amp;#34;) ;; 多了一个变量描述字符串 C-h v能看到描述 局部变量 let中变量列表的赋值顺序是不定的，因此在第一个例子里 a3 无</description>
+    </item>
+    
+  </channel>
+</rss>

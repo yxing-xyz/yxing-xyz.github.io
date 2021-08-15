@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debian on 何年重遇天涯</title>
+    <link>/tags/debian/</link>
+    <description>Recent content in Debian on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 08 Dec 2020 16:28:00 +0800</lastBuildDate><atom:link href="/tags/debian/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Mirrors</title>
+      <link>/post/linux/debian/</link>
+      <pubDate>Tue, 08 Dec 2020 16:28:00 +0800</pubDate>
+      
+      <guid>/post/linux/debian/</guid>
+      <description>Debian Mirrors 将cloud.aliyuncs是阿里云ECS内部加速地址，换成aliyun就是互联网地址 1 sed -i &amp;#39;s#\w*\.debian\.org#mirrors\.163\.com#g&amp;#39; /etc/apt/sources.list debian 10 buster 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Bash Utils - 何年重遇天涯</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &amp;#34;*.log&amp;#34; -type f -size 1M" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="/post/devops/bash_utils/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Bash Utils" />
+<meta property="og:description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &#34;*.log&#34; -type f -size 1M" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/devops/bash_utils/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-16T20:00:00+08:00" />
+<meta property="article:modified_time" content="2021-07-22T14:28:00+08:00" />
+
+<meta itemprop="name" content="Bash Utils">
+<meta itemprop="description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &#34;*.log&#34; -type f -size 1M"><meta itemprop="datePublished" content="2021-06-16T20:00:00+08:00" />
+<meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
+<meta itemprop="wordCount" content="240">
+<meta itemprop="keywords" content="Bash,Util," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bash Utils"/>
+<meta name="twitter:description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &#34;*.log&#34; -type f -size 1M"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">何年重遇天涯</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About Me</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">何年重遇天涯</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About Me</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Bash Utils</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-16 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#同步时间">同步时间</a></li>
+        <li><a href="#curl">curl</a>
+          <ul>
+            <li><a href="#http-code">http code</a></li>
+          </ul>
+        </li>
+        <li><a href="#日志">日志</a></li>
+        <li><a href="#mysql备份">MySQL备份</a></li>
+        <li><a href="#git">git</a>
+          <ul>
+            <li><a href="#批量删除远程tag">批量删除远程tag</a></li>
+            <li><a href="#批量删除本地tag">批量删除本地tag</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="同步时间">同步时间</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo ntpdate ntp.aliyun.com
+sudo hwclock -w
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="curl">curl</h2>
+<h3 id="http-code">http code</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">url</span><span class="o">=</span><span class="s1">&#39;https://test.juewei.com/actuator/health&#39;</span><span class="p">;</span> <span class="nv">code</span><span class="o">=</span>200<span class="p">;</span> <span class="k">while</span> <span class="o">[</span> <span class="nv">$code</span> -eq <span class="m">200</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span> <span class="nv">code</span><span class="o">=</span><span class="sb">`</span>curl -I -m <span class="m">30</span> -o /dev/null -s -w %<span class="o">{</span>http_code<span class="o">}</span><span class="s2">&#34;\n&#34;</span> <span class="nv">$url</span><span class="sb">`</span><span class="p">;</span> sleep 0.1<span class="p">;</span> <span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="日志">日志</h2>
+<p>分割日志文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">split -b <span class="m">104857600</span> -d -a <span class="m">6</span> nohup.out ./2021-07-12_
+</code></pre></td></tr></table>
+</div>
+</div><p>清空日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo find . -name <span class="s2">&#34;*.log&#34;</span> -type f -size 1M <span class="p">|</span> awk <span class="s1">&#39;{print &#34;echo &gt; &#34;$0}&#39;</span> <span class="p">|</span> bash
+sudo find . -name <span class="s2">&#34;*.log&#34;</span> -type f -size 1M <span class="p">|</span> xargs truncate -s <span class="m">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="mysql备份">MySQL备份</h2>
+<p>mysqldump是单线程备份,最蛋疼的是默认参数会锁表影响业务,其次参数顺序需要注意,不然默认不会生效.</p>
+<ol>
+<li>加入skip-opt防止锁表</li>
+<li>加入quick防止内存oom</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mysqldump -h <span class="si">${</span><span class="nv">HOST</span><span class="si">}</span> -u <span class="si">${</span><span class="nv">USER</span><span class="si">}</span> -P <span class="m">3306</span> -p<span class="si">${</span><span class="nv">PASSWD</span><span class="si">}</span><span class="se">\$\@\$</span>H --skip-opt --quick --default-character-set<span class="o">=</span>utf8 --triggers <span class="si">${</span><span class="nv">DBNAME</span><span class="si">}</span> <span class="p">|</span> gzip &gt; ./backup.gz
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="git">git</h2>
+<h3 id="批量删除远程tag">批量删除远程tag</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git show-ref --tag <span class="p">|</span> awk <span class="s1">&#39;{print &#34;:&#34; $2}&#39;</span> <span class="p">|</span> xargs git push origin
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="批量删除本地tag">批量删除本地tag</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git tag -l <span class="p">|</span> xargs git tag -d
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">何年重遇天涯</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-07-22
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank">Creative Commons Attribution-ShareAlike License</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/bash/">Bash</a>
+          <a href="/tags/util/">Util</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/devops/note/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">运维笔记</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/programming/ajax_cors/">
+            <span class="next-text nav-default">Ajax Cors</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
