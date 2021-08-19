@@ -6,7 +6,25 @@
     <description>Recent content in Syntax on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 18 Aug 2021 21:56:00 +0800</lastBuildDate><atom:link href="/tags/syntax/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Nov 2021 21:27:00 +0800</lastBuildDate><atom:link href="/tags/syntax/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL</title>
+      <link>/post/programming/sql/</link>
+      <pubDate>Fri, 26 Nov 2021 21:27:00 +0800</pubDate>
+      
+      <guid>/post/programming/sql/</guid>
+      <description>MySQL 预编译批量插入 当预编译批量插入的时候数据量太大MySQL服务器会报错, 还是直接拼values的sql吧 1 Error 1390: Prepared statement contains too many placeholders 查询所有数据库占用</description>
+    </item>
+    
+    <item>
+      <title>结构体</title>
+      <link>/post/programming/struct/</link>
+      <pubDate>Tue, 31 Aug 2021 10:29:00 +0800</pubDate>
+      
+      <guid>/post/programming/struct/</guid>
+      <description>定义 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 // c #include &amp;lt;stdio.h&amp;gt;typedef struct _user { char name[64]; int age; } user; int main(int argc, char *argv[]) { user user = { .name=&amp;#34;jack&amp;#34;, .age=20 }; printf(&amp;#34;%s\n&amp;#34;, user.name); printf(&amp;#34;%d\n&amp;#34;, user.age); return 0; } 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18</description>
+    </item>
+    
     <item>
       <title>Elisp</title>
       <link>/post/programming/elisp/</link>
@@ -40,7 +58,7 @@
       <pubDate>Thu, 14 May 2020 20:06:39 +0800</pubDate>
       
       <guid>/post/programming/c_macro_definition/</guid>
-      <description>Get structure member offset bytes You only need to include &amp;lt;stddef.h&amp;gt; to use offset or write the following code 1 #define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) &amp;lt;stdbool.h&amp;gt; You can use Booleans as long as you include &amp;lt;stdbool.h&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #ifndef _STDBOOL #define _STDBOOL #define __bool_true_false_are_defined 1 #ifndef __cplusplus #define bool _Bool #define false 0 #define true 1 #endif</description>
+      <description>Get structure member offset bytes You only need to include &amp;lt;stddef.h&amp;gt; to use offset or write the following code 1 #define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) Get structure size 1 2 #define ALIGN(size, boundary) (((size) + ((boundary)-1)) &amp;amp; ~((boundary)-1)) #define ALIGN_DEFAULT(size) ALIGN(size, 8) &amp;lt;stdbool.h&amp;gt; You can use Booleans as long as you include &amp;lt;stdbool.h&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #ifndef _STDBOOL</description>
     </item>
     
     <item>
@@ -58,7 +76,7 @@
       <pubDate>Fri, 13 Oct 2017 15:13:01 +0800</pubDate>
       
       <guid>/post/programming/operator_priority/</guid>
-      <description></description>
+      <description>++i和i++特殊例子 1 2 3 4 5 int a, i= 0 a = ++i // a = 1, i = 1 int b, j = 0 b = i++ // b = 0, j = 1</description>
     </item>
     
   </channel>

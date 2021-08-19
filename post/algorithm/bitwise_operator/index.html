@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/post/algorithm/bitwise_operator/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Bitwise Operation">
 <meta itemprop="description" content="基础 符号 描述 运算规则 &amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &lt;&lt; 按位左移 各二进制位全部左移若干位，高位"><meta itemprop="datePublished" content="2017-11-23T11:28:03+08:00" />
 <meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
-<meta itemprop="wordCount" content="533">
+<meta itemprop="wordCount" content="581">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Bitwise Operation"/>
 <meta name="twitter:description" content="基础 符号 描述 运算规则 &amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &lt;&lt; 按位左移 各二进制位全部左移若干位，高位"/>
@@ -157,6 +157,7 @@
             <li><a href="#5求绝对值">5.求绝对值</a></li>
             <li><a href="#6防溢出式求平均数">6.防溢出式求平均数</a></li>
             <li><a href="#7数据类型高低位交换必须是无符号整数">7.数据类型高低位交换(必须是无符号整数)</a></li>
+            <li><a href="#四舍五入">四舍五入</a></li>
           </ul>
         </li>
       </ul>
@@ -338,6 +339,21 @@
    <span class="n">PrintfBinary</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="四舍五入">四舍五入</h3>
+<p>cent单位分， money单位元
+这里可以位与运算实现floor</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">round</span><span class="p">(</span><span class="nx">cent</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int64</span> <span class="p">{</span>
+	 <span class="k">return</span> <span class="nb">int64</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nf">Floor</span><span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">cent</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -422,7 +438,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

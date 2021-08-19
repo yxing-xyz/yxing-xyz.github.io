@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="何年重遇天涯" /><meta name="description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &amp;#34;*.log&amp;#34; -type f -size 1M" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/post/devops/bash_utils/" />
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="Bash Utils" />
-<meta property="og:description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &#34;*.log&#34; -type f -size 1M" />
+<meta property="og:description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/devops/bash_utils/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-06-16T20:00:00+08:00" />
 <meta property="article:modified_time" content="2021-07-22T14:28:00+08:00" />
 
 <meta itemprop="name" content="Bash Utils">
-<meta itemprop="description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &#34;*.log&#34; -type f -size 1M"><meta itemprop="datePublished" content="2021-06-16T20:00:00+08:00" />
+<meta itemprop="description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书"><meta itemprop="datePublished" content="2021-06-16T20:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
-<meta itemprop="wordCount" content="240">
-<meta itemprop="keywords" content="Bash,Util," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="371">
+<meta itemprop="keywords" content="Bash,Util,Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Bash Utils"/>
-<meta name="twitter:description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &#34;*.log&#34; -type f -size 1M"/>
+<meta name="twitter:description" content="同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&#39;https://test.juewei.com/actuator/health&#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&#34;\n&#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -153,6 +153,13 @@
             <li><a href="#http-code">http code</a></li>
           </ul>
         </li>
+        <li><a href="#openssl">openssl</a>
+          <ul>
+            <li><a href="#查看https的证书信息">查看https的证书信息</a></li>
+            <li><a href="#更换tls证书">更换TLS证书</a></li>
+          </ul>
+        </li>
+        <li><a href="#redis">redis</a></li>
         <li><a href="#日志">日志</a></li>
         <li><a href="#mysql备份">MySQL备份</a></li>
         <li><a href="#git">git</a>
@@ -187,6 +194,60 @@ sudo hwclock -w
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">url</span><span class="o">=</span><span class="s1">&#39;https://test.juewei.com/actuator/health&#39;</span><span class="p">;</span> <span class="nv">code</span><span class="o">=</span>200<span class="p">;</span> <span class="k">while</span> <span class="o">[</span> <span class="nv">$code</span> -eq <span class="m">200</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span> <span class="nv">code</span><span class="o">=</span><span class="sb">`</span>curl -I -m <span class="m">30</span> -o /dev/null -s -w %<span class="o">{</span>http_code<span class="o">}</span><span class="s2">&#34;\n&#34;</span> <span class="nv">$url</span><span class="sb">`</span><span class="p">;</span> sleep 0.1<span class="p">;</span> <span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="openssl">openssl</h2>
+<h3 id="查看https的证书信息">查看https的证书信息</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl s_client -servername prod.juewei.com -connect www.baidu.com:443  <span class="p">|</span> openssl x509 -noout -dates
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="更换tls证书">更换TLS证书</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 找特定的证书</span>
+grep -s baidu.com.crt ./*.conf
+<span class="c1"># 替换证书文件名</span>
+ls ./*.conf <span class="p">|</span> xargs sed -i <span class="s1">&#39;s/a.crt/b.crt/&#39;</span> ./*.conf
+<span class="c1"># nginx检测下,然后重启</span>
+nginx -t
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="redis">redis</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget http://download.redis.io/releases/redis-6.0.1.tar.gz
+tar xzf redis-6.0.1.tar.gz
+<span class="nb">cd</span> redis-6.0.1
+make <span class="nv">BUILD_TLS</span><span class="o">=</span>yes <span class="nv">USE_SYSTEMD</span><span class="o">=</span>yes -j4
+make install
+mkdir -p /etc/redis
+cp ./redis.conf /etc/redis/
+cp ./utils/systemd-redis_server.service  /etc/systemd/system/redis.service
+<span class="c1"># 编辑service指定配置文件启动</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="日志">日志</h2>
@@ -268,6 +329,7 @@ sudo find . -name <span class="s2">&#34;*.log&#34;</span> -type f -size 1M <span
       <div class="post-tags">
           <a href="/tags/bash/">Bash</a>
           <a href="/tags/util/">Util</a>
+          <a href="/tags/linux/">Linux</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/devops/note/">
@@ -328,7 +390,7 @@ sudo find . -name <span class="s2">&#34;*.log&#34;</span> -type f -size 1M <span
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

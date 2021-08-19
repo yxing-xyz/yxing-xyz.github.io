@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/post/devops/note/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="运维笔记">
 <meta itemprop="description" content="基础 du和df空间不一致: 1. rm删除文件inode节点被进程打开内核不会释放空间. 2. mount挂载非空目录隐藏了原磁盘导致du并没有统计这部"><meta itemprop="datePublished" content="2021-07-10T12:32:00+08:00" />
 <meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
-<meta itemprop="wordCount" content="1765">
+<meta itemprop="wordCount" content="2756">
 <meta itemprop="keywords" content="note," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="运维笔记"/>
 <meta name="twitter:description" content="基础 du和df空间不一致: 1. rm删除文件inode节点被进程打开内核不会释放空间. 2. mount挂载非空目录隐藏了原磁盘导致du并没有统计这部"/>
@@ -148,6 +148,13 @@
     <li>
       <ul>
         <li><a href="#基础">基础</a></li>
+      </ul>
+    </li>
+    <li><a href="#k8s">k8s</a></li>
+    <li><a href="#重启pod">重启pod</a>
+      <ul>
+        <li><a href="#1-patch或者replace">1. patch或者replace</a></li>
+        <li><a href="#2-rollout">2. rollout</a></li>
         <li><a href="#阿里云">阿里云</a></li>
       </ul>
     </li>
@@ -158,15 +165,27 @@
     <div class="post-content">
       <h2 id="基础">基础</h2>
 <blockquote>
-<p>du和df空间不一致: 1. rm删除文件inode节点被进程打开内核不会释放空间. 2. mount挂载非空目录隐藏了原磁盘导致du并没有统计这部分空间
-PHP必须要开启opcache，不然会挂在磁盘并发请求打挂系统，cpu利用率也上不去</p>
+<p>du和df空间不一致: 1. rm删除文件inode节点被进程打开内核不会释放空间. 2. mount挂载非空目录隐藏了原磁盘导致du并没有统计这部分空间</p>
+</blockquote>
+<blockquote>
+<p>PHP必须要开启opcache，不然会挂在磁盘并发请求打挂系统，cpu利用率也上不去</p>
 </blockquote>
 <blockquote>
 <p>redis万不得以不要存放永久数据，最好设置ttl</p>
 </blockquote>
 <blockquote>
-<p>java、php和数据连接池之类需要调整合适的线程、进程数，因为同步阻塞模型需要很多线程来接受请求和数据库连接池数量可以让请求不要停留业务服务器而是停留数据库服务器，提高并发，而Nginx之类worker设置cpu核心数就可以了，因为nginx异步模型会全力工作，只需要减少进程数保证一核心一个work进程避免内核调度进程切换耗费资源</p>
+<p>java、php和数据连接池之类需要调整合适的线程、进程数，因为同步阻塞模型需要很多线程来接受请求和数据库连接池数量可以让请求不要停留业务服务器而是停留数据库服务器，提高并发，而Nginx之类worker设置cpu核心数就可以了，因为nginx异步模型会全力工作，只需要减少进程数保证一核心一个work进程避免内核调度进程切换耗费资源,说明内核和用户上下文切换很耗费资源，（golang牛逼）。</p>
 </blockquote>
+<blockquote>
+<p>走公网插入mysql的性能耗时大概网络20ms, 通过线程池并发提供句柄给上层应用使用能提高吞吐量.</p>
+</blockquote>
+<blockquote>
+<p>nginx默认目录会重定向pathinfo后面追加/符号</p>
+</blockquote>
+<blockquote>
+<p>nginx配置absolute_redirect off会使用Localtion相对路径</p>
+</blockquote>
+<h1 id="k8s">k8s</h1>
 <blockquote>
 <p>ipvs在udp使用的时候会有一个超时可以用ipvsadm -L &ndash;tiemout查看，默认300s， 这个会导致coredns重启300s内会有卡吨现象，因为ipvs未转换vip成实际ip</p>
 </blockquote>
@@ -191,7 +210,48 @@ PHP必须要开启opcache，不然会挂在磁盘并发请求打挂系统，cpu�
 <blockquote>
 <p>k8s的nginx-ingress是订阅了endpoints然后nginx重新加载后端ip地址, 因为k8s重启更新资源并不保证同步nginx的监听,只保证node更新ipvs端点.所以前端是nginx-ingress,后端的服务最好在prestop里sleep一定时间,保证nginx同步更新端点后再结束pod, 如果是svc的ip调用不需要,因为k8s保证了同步更新</p>
 </blockquote>
-<h2 id="阿里云">阿里云</h2>
+<blockquote>
+<p>istio的tls认证放在一个istio网关上， virutalservice和gateway放在同一个命名空间下。 如果跨网关使用同样的证书，或者跨命名空间使用同样的证书是不生效的</p>
+</blockquote>
+<blockquote>
+<p>自定义kube-sheduler的时候如果开启高可用默认情况会竞争kube-system命名空间的lease资源名kube-sheduler, 但是这个资源被default-sheduler锁定了导致启动不了所以需要换资源名或者命名空间</p>
+</blockquote>
+<blockquote>
+<p>ingress不能跨命名空间, 可以在ingress的命名空间里自定义endpoint来实现跨命名空间</p>
+</blockquote>
+<h1 id="重启pod">重启pod</h1>
+<p>都是修改yaml达到重启的目的比如set image, 只是功能上需要做阻塞(解决全部重启雪崩效应), replace是阻塞替换, restart是非阻塞需要加status</p>
+<h2 id="1-patch或者replace">1. patch或者replace</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kubectl patch deployment web -p <span class="se">\
+</span><span class="se"></span>  <span class="s2">&#34;{\&#34;spec\&#34;:{\&#34;template\&#34;:{\&#34;metadata\&#34;:{\&#34;annotations\&#34;:{\&#34;date\&#34;:\&#34;`date +&#39;%s&#39;`\&#34;}}}}}&#34;</span>
+
+kubectl get pod web-kw86d -o yaml <span class="p">|</span> kubectl replace --force -f -
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-rollout">2. rollout</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 重启</span>
+kubectl rollout restart deployment web
+<span class="c1"># 等待重启完毕</span>
+kubectl rollout status deployment/web
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="阿里云">阿里云</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -212,6 +272,13 @@ PHP必须要开启opcache，不然会挂在磁盘并发请求打挂系统，cpu�
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">1. 负载均衡四层后端负载访问负载均衡是访问不通
@@ -232,6 +299,13 @@ PHP必须要开启opcache，不然会挂在磁盘并发请求打挂系统，cpu�
                                                   internet
 13. 阿里云日志的daemonset-crd方式，如果两个k8s集群共用一个logstore，需要重新添加新的机器组，因为重复使用crd会覆盖掉机器组，应用日志采用sidecar-crd方法不会有性能瓶颈
 14. 联系方式: 消息中心, 云监控, k8s集群
+15. 阿里云的CDN不会将浏览器传递的URL+传递到OSS中，导致如果文件名有+会找不到
+16. 托管版k8s复用负载均衡的时候界面不能出现或者注解不能复用某个负载均衡是因为该负载均衡的标签被标记了阿里的ccm就不会更新负载均衡
+17. 阿里云ack的k8s集群会将SLB的IP会被IPVS解析转发到后端Node节点上也就是SVCIP的作用, 流量不会到负载均衡, 
+也就不会触发负载均衡四层协议后端不能同时做客户端和服务端的bug,k8s 1.20.11版本后阿里云的这个特性会收到svc的流量策略影响,如果是cluster那么会同步到所有node设置ipvs后端节点, 如果是local那么只会同步当前有svc后端pod的node.
+意思就是local如果node上有这个pod那么就会直接转发不到走负载均衡, 没有pod那么connect refuse, cluster不管三七二十一全都不走负载均衡, 
+不过阿里云自身新增注解可以设置全都走负载均衡
+18. 阿里云ECS禁用了25端口, 建议用80做SSL端口邮件推送
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -318,7 +392,7 @@ PHP必须要开启opcache，不然会挂在磁盘并发请求打挂系统，cpu�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

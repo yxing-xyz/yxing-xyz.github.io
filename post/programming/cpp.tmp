@@ -1,0 +1,410 @@
+## c/cpp
+> c整形低容量到高容量（char -> int）转换，原操作数是有符号那么会在多余的bit位赋值符号位的bit(movsbl),如果原操作数是无符号那么会多出来的bit位赋值0（movzbl）
+
+> c整形高容量到低容量(int -> char)转换, 将低位的bit全部赋值给低容量整形
+
+> 当局部变量被定义时，系统不会对其初始化(有可能是堆栈遗留,或者编译器给予的默认值), 但是静态局部变量默认赋值0等同全局变量, 所以局部变量一般最好手动初始化, 定义全局变量时，系统会自动初始化对应类型的初始值,c语言是0. 
+
+> const最左边限制指针指向区域的内存不可变,否则限制指针变量不可变。
+
+> gcc构建默认级别不会优化代码比如编译器级别指令重排序,当-O2的时候会优化指令进行重排序(乱序执行),或者变量值固定在寄存器,不会刷入cache(cpu缓存一致性)和主存.
+CPU cache的一致性由硬件层面(MESI Protocol)解决,软件比如GCC可以默认不同核的L1 L2cache的值是一致,取决什么时候刷入内存,也就说并发编程的时候对变量的读取和写入都是时候,只要不被编译器使用寄存器优化掉
+另外需要注意的是，在所有的平台上，信号量会保持 Release 和 Require 的语义，也就是说，所有写入共享内存的在 sem_post() 执行后可见，而读取在 sem_wait() 后可见。
+GCC -O2优化的时候volatile的作用的是变量地址操作之前值读写入cpu cache或者主存, 不会禁止编译器指令重新排序以下这个编译器指令可以禁止编译器重排指令
+```c
+	asm volatile("" ::: "memory");
+```
+以下这个指令是在CPU级别指定级别禁止指令重排序
+```c
+// Store Barrier   确保 Barrier 前后的 store 操作不会发生乱序;
+#define STORE_BARRIER() __asm__ __volatile__("sfence")
+// Load Barrier    确保 Barrier 前后的 load 操作不会发生乱序;
+#define LOAD_BARRIER() __asm__ __volatile__("lfence")
+// Full Barrier    确保 Barrier 前后的内存操作不会发生乱序;
+#define FULL_BARRIER() __asm__ __volatile__("mfence")
+```
+
+> #define和typedef的区别, 1.两个类型的位置相反. 2. 定义指针变量T pc1,pc2的时候#define是简单的字符串替换而typedef没有问题. 3.与const搭配都能实现限制指针和指针引用空间不可变,只是typedef会把左边const右移靠近变量而define只是简单替换.
+
+> JIT技术是通过mmap函数和参数PROT_EXEC //映射区域可被执行；PROT_READ //映射区域可被读取；PROT_WRITE //映射区域可被写入, 实现动态插入函数.
+```C
+#include<stdio.h>                                                                                            
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/mman.h>
+
+//分配内存
+void* create_space(size_t size) {
+    void* ptr = mmap(0, size,
+            PROT_READ | PROT_WRITE | PROT_EXEC,
+            MAP_PRIVATE | MAP_ANON,
+            -1, 0);   
+    return ptr;
+}
+
+//在内存中创建函数
+void copy_code_2_space(unsigned char* addr) {
+    unsigned char macCode[] = {
+        0x48, 0x83, 0xc0, 0x01,
+        0xc3 
+    };
+    memcpy(addr, macCode, sizeof(macCode));
+}
+
+//main 声明一个函数指针TestFun用来指向我们的求和函数在内存中的地址
+int main(int argc, char** argv) {                                                                                              
+    const size_t SIZE = 1024;
+    typedef long (*TestFun)(long);
+    void* addr = create_space(SIZE);
+    copy_code_2_space(addr);
+    TestFun test = addr;
+    int result = test(1);
+    printf("result = %d\n", result); 
+    return 0;
+}
+```
+
+## cpp
+
+> C++11 struct可以给每个成员变量赋予默认的初始值
+```cpp
+struct Student{
+    char* name = nullptr;
+    unsigned int age  = 15;
+    int number = 21509111;  
+};
+```
+> c++11: 使用 using 代替 typedef，给类型命名
+```cpp
+using uint8=unsigned char; //等价于typedef unsigned char uint8;
+using FunctionPtr = void (*)(); //等价于typedef void (FunctionPtr)();
+template using MapString = std::map<T, char>; //定义模板别名，注意typedef无法定义模板别名，因为typedef只能作用于具体类型而非模板
+```
+
+> cpp支持R表示原始字符串, thread_local变量不同线程的地址不一样在main函数中操作线程变量,后续其他线程访问变量的时候不受影响
+
+> c++11: default/delete 控制默认函数, override /final 强制重写/禁止重写虚函数
+
+> c++默认函数有：（默认）构造函数、拷贝构造函数、拷贝赋值运算符、析构函数，c++11之后增加移动构造函数、移动赋值运算符
+```c++
+#include <iostream>
+using namespace std;
+
+class A
+{
+public:
+    int x;
+    A(int x) : x(x)
+    {
+        cout << "Constructor: " << this << endl;
+    }
+    A(A &a) : x(a.x)
+    {
+        cout << "Copy Constructor: " << this << endl;
+    }
+    A &operator=(A &a)
+    {
+        x = 123;
+        a.x = 456;
+        cout << "Copy Assignment operator: " << this << endl;
+        return *this;
+    }
+    A(A &&a) : x(a.x)
+    {
+        cout << "Move Constructor: " << this << endl;
+    }
+    A &operator=(A &&a)
+    {
+        x = a.x;
+        cout << "Move Assignment operator: " << this << endl;
+        return *this;
+    }
+};
+
+A GetA()
+{
+    A aa(0xF);
+    cout << &aa << endl;
+    return aa;
+}
+
+A &&MoveA(A &a)
+{
+    return std::move(a);
+}
+
+
+int main(int argc, char **argv)
+{
+  // gcc下需要开启set(CMAKE_CXX_FLAGS   "-fno-elide-constructors")关闭优化, 编译器默认会优化导致，移动构造函数被优化掉
+  cout << "-------------------------1.默认构造函数-------------------------" << endl;
+  A a(1);
+  cout << endl;
+  cout << endl;
+
+  cout << "-------------------------2.拷贝构造函数-------------------------" << endl;
+  A b(a);
+  A c = b;
+  cout << endl;
+  cout << endl;
+
+  cout << "-------------------------3.拷贝赋值运算符-------------------------" << endl;
+  c = b;
+  cout << endl;
+  cout << endl;
+
+  cout << "-------------------------4.移动构造函数-------------------------" << endl;
+  A d = std::move(c);
+  cout << &d << endl;
+  cout << &c << endl;
+  cout << endl;
+  cout << endl;
+
+  cout << "-------------------------5.构造函数+移动构造函数-------------------------" << endl;
+  A e = A(1);
+  cout << &e << endl;
+  cout << endl;
+  cout << endl;
+
+  cout << "-------------------------6.构造函数+移动构造函数+移动构造函数-------------------------" << endl;
+  A f = GetA();
+  cout << &f << endl;
+  cout << endl;
+  cout << endl;
+
+  cout << "-------------------------7.没有创建新对象，也不更新任何对象，只是将MoveA()的返回值绑定到右值引用g。因此不调用构造函数，也不调用赋值运算符-------------------------" << endl;
+  A &&g = MoveA(a);
+  cout << &g << endl;
+  
+  cout << "-------------------------8.构造函数+移动赋值运算符-------------------------" << endl;
+  d = A(2);
+  cout << &d << endl;
+  return 0; 
+}
+```
+
+> C++11中的mutable是用来修改const函数中的不可修改类成员的缺陷
+```cpp
+class Log{
+ 
+public:
+    //
+    void print(const std::string& str) const
+    {    
+        printf("%s", str_cstr());
+        //统计输出次数
+        printNums++;
+    }
+ 
+private:
+    //这里必须声明为mutable
+    mutable int printNums;
+}
+```
+
+> NULL和nullptr都是代表空指针，但是NULL在重载函数的时候却匹配到了参数为int的那个版本。 NULL在C++中就是0，这是因为在C++中void* 类型是不允许隐式转换成其他类型的，所以之前C++中用0来代表空指针，但是在重载整形的情况下，会出现上述的问题。所以，C++11加入了nullptr，可以保证在任何情况下都代表空指针，而不会出现上述的情况，因此，建议以后还是都用nullptr替代NULL吧，而NULL就当做0使用。它可以转换成任何指针类型和bool布尔类型（主要是为了兼容普通指针可以作为条件判断语句的写法），但是不能被转换为整数。
+
+> cpp的struct声明变量的时候可以不用带struct,且结构体里可以放函数实现,c就不同需要带struct声明和只能放函数的指针.
+
+> 一个对象既是普通类型（Trivial Type）又是标准布局类型（Standard-layout Type）那么这个对象就是POD类型。std::is_pod<A>::value可以判断是否是pod类型
+
+> 引用给某个变量起别名不占用存储空间, 引用被创建的同时必须初始化（指针则可以在任何时候初始化）。不能有NULL引用，引用必须与合法的存储单元关联, 一旦引用被初始化，就不能改变引用的对象。
+
+> new的指针变量用delete, new []的指针变量用delete[]. 
+
+> 类的成员函数可以把原型和定义写在内部,或者单独使用范围解析运算符 :: 来定义
+
+> 构造函数名和类名一致,它不会返回任何值,可以带参数,有时候必须配合初始化列表(只能在构造函数)初始化成员, 析构函数名和类名一致前面多了~,它不会返回任何值,也不能带任何参数
+
+> c++在声明函数时允许给某些参数指定缺省值。参数缺省值一般写在声明中。缺省参数从右向左连续赋值。
+
+> 如果类有常量或者依赖另外一个类对象另外一个类对象只有有参构造函数那么需要用初始化列表进行初始化. 初始化列表先执行然后才是构造函数
+
+> 类的访问有public, protected, private. public的成员访问无限制, protected的成员只能类里或者派生类访问. private只能只能被本类成员（类内）和友元访问
+
+> 如果没有指明访问限定符（public，private），class中默认的private，而struct中的成员默认是public的。
+
+> 派生类会继承基类的所有成员属性. 只是被基类的访问修饰符决定是否可见(可见的意思就是可使用),可见成员的是public和protected.
+
+> cpp继承的方式也有public(公有), protected(保护), private(私有), java的继承只有pubilc(公有)继承. public继承保持基类public,protectced的成员访问修饰符不变. protected继承会将基类public成员访问修饰符改变为protected, private会将基类的所有访问修饰符改为私有.
+
+> 只有非静态成员变量才属于类的对象上。成员函数不占用对象空间，所有函数共享一个函数实例。
+
+> 类的对象中只保存非静态成员变量，不保存成员函数，sizeof求得的大小只是非静态成员变量占用的空间。空类的sizeof字节数为1,定义的struct无成员时，也占用一个字节；而在C语言中不占用空间。
+
+> 创建子类对象时，先创建父类，再创建子类。析构时，先析构子类，再析构父类。
+
+> 拷贝构造函数通常用于: 1.使用同类型对象来初始化对象比如赋值 2.调用函数参数会拷贝构造原对象 3.函数返回对象
+
+> 可在想要 “禁止使用” 的特殊成员函数声明后加 “= delete”，而需要保留的加 "= default" 或者不采取操作, delete 的扩展 C++11 中，delete 关键字可用于任何函数，不仅仅局限于类成员函数
+
+> operator + class重载class(对象)这个方法, 对象转换
+
+> operator(),重载()符,实现类伪装成函数
+
+> override /final 强制重写/禁止重写虚函数
+
+> using
+1. using 在 C++11之前主要用于名字空间、类型、函数与对象的引入，实际上是去除作用域的限制。
+2. 只要派生类和基类同名函数, 外部访问派生类默认隐藏基类的同名方法, 不论派生类是重载还是重写虚函数.但是类成员函数可以通过基类::指定访问隐藏的函数
+3. 使用 using 代替 typedef，给类型命名.
+
+> 拷贝构造函数, 移动构造函数, 比如赋值的时候有需要提高性能不要重新开辟内存就可以使用移动构造函数,将指针解引用赋值给新指针解引用然后将原指针赋值nullptr,这样就不会原对象和新对象重复释放释放指针错粗(NULL和nullptr可以重复释放)
+
+> 编译器提供的类函数, 如果用户定义有参构造函数，C++不在提供默认无参构造，但是会提供拷贝构造。如果用户定义拷贝构造函数，C++不会再提供其他构造函数。
+1. 默认构造函数（无参，函数体为空）
+2. 默认析构函数（无参，函数体为空）
+3. 默认拷贝构造函数，对属性进行值拷贝
+4. 赋值运算符operator=，对属性进行值拷贝
+
+> 类的友元函数是定义在类外部，但有权访问类的所有私有（privata）成员和保护（protected）成员。尽管友元函数的原型有在类的定义中出现过，但是友元函数并不是成员函数。友元可以是一个函数，该函数被称为友元函数；友元也可以是一个类，该类被称为友元类，在这种情况下，整个类及其所有成员都是友元。
+
+> 类的静态成员不允许在类中初始化, 但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化
+
+> cpp支持多继承,可以分别指定继承基类修饰符, 多继承会出现菱形继承会有二义性. 菱形继承导致数据有两份，造成资源浪费。通过在继承描述符加上virtual变虚继承解决只保留一份.
+
+> 隐式转换不能父类对象把赋值给子对象,反过来可以. 子类赋值给父类对象调用的时候非虚函数会调用继承父类的方法, 通过父类的虚函数(接口, 抽象类)可以实现多态, 编译绑定和运行绑定.
+
+> 多态分为静态绑定和动态绑定
+* 静态多态：函数重载和运算符重载属于静态多态，复用函数名。静态多态的函数地址早绑定--编译阶段确定函数地址。
+* 动态多态：派生类重写虚函数实现运行时多态。 动态多态的函数地址晚绑定--运行阶段确定函数地址。
+
+> 在多态中，通常父类中虚函数的实现是毫无意义的，主要是调用子类重写的内容。因此可以将虚函数改为纯虚函数。末尾加上=0而没有提供函数的实现，称为纯虚函数。拥有纯虚函数的类称为抽象类，抽象类不能实例化（或者说不能创建该类的对象），而只能被其他类继承。子类必须重写抽象类中的纯虚函数，否则也属于抽象类
+
+> 多态使用时，如果子类中有属性开辟到堆区，那么父类指针在释放时无法调用到子类的析构代码。解决方法：将父类中的析构函数改为虚析构或纯虚析构。子类析构函数会自动调用父类的析构函数, 父虚析函数只是为了多态的时候动态绑定子类的析构函数
+
+> cpp的强制转换const_cast, static_cast, dynamic_cast, reinterpret_cast
+1. 一般搭配指针或者引用，用于强制消除对象的常量性, 用来去除变量的const属性 。它是唯一能做到这一点的C++风格的强制转型。这个转换能剥离一个对象的const属性.
+
+2. static_cast(主要由程序员决定安全性)
+* 编译期语法校验, 基类与子类间的转换：子类指针转成基类指针是安全的，基类指针转成子类指针是不安全的，因此一般使用dynamic_cast. 上行安全,下行不安全.
+* 基本类型间的转换，如int，char，double等。静态转换不能用于无关类型指针的转换，如int->double 是错误的
+* 把空指针转换成目标类型的空指针
+* 把任何类型的表达式转换成void类型
+* 注意：static_cast不能转换掉expression的const、volatile、或者__unaligned属性。
+
+3. dynamic_cast 用于面向对象也就是派生类和基类,动态类型转换，运行时会进行类型安全检查（失败时返回空指针）。它是继承类间安全的指针转换方法。
+* 子类指针转成基类指针是安全的
+* 基类指针转成子类指针是不安全的，因为此时调用子类独有的数据时可能发生数据越界，因此返回nullptr
+* 同基类下的不同子类间的指针转换也是不安全的，因此返回nullptr
+
+4. reinterpret_cast 这种转换仅仅重新解释类型，没有进行二进制的转换, c语言的强制转换
+* 转换的类型必须是指针，引用，算数类型，函数指针或者成员指针
+* 在比特位上的转换，可以把指针转成整数，再把整数重新转成指针
+* 最普遍的用途在于函数指针间的转换
+* 难以保证移植性
+
+> 左右值
+1. 任何表达式不是左值就是右值，左值和右值只是针对表达式定义的
+2. 右值的生存期只到表达式结束，即语句的分号之后右值的生存期就结束了
+3. 能够对左值取地址，但无法对右值取址。
+4. 左值能够在赋值表达式的左边和右边，但是右值无法放在赋值表达式的左边
+
+> C++中的关键字explicit主要是用来修饰类的构造函数，被修饰的构造函数的类，不能发生相应的隐式类型转换，只能以显示的方式进行类型转换。类构造函数默认情况下声明为隐式的即implicit。
+
+> const如果修饰成员函数那么,const参与重载根据如果是const对象调用就会调用const修饰的重载函数, 如果const修饰参数那么char *a和const char *a是不同类型的参数是重载,但是char *a和char * const a则是同样的参数不能重载,因为char *a 中a指向的是一个字符串变量，而const char *a指向的是一个字符串常量，所以当参数为字符串常量时，调用第二个函数，而当函数是字符串变量时，调用第一个函数。但是char *a和char * const a，这两个都是指向字符串变量，不同的是char *a是指针变量 而char *const a是指针常量，这就和int i和const int i的关系一样了，所以也会提示重定义。&引用也是同理.
+
+> 模板类的成员函数的实现要放在.h文件中
+
+## c++11右值引用
+移动构造函数, 移动赋值函数: 目的减少临时变量的内存拷贝, 非临时变量的移动会导致原变量丧失功能, 移走堆区持有指针就不会重复析构函数释放指针导致崩溃(nullptr和NULL可以重复释放,因为c库默认判断空指针返回)
+```c++
+#include <memory>
+#include <iostream>
+
+class Holder
+{
+public:
+    Holder(int size) // Constructor
+    {
+        m_data = new int[size];
+        m_size = size;
+        std::cout << "构造函数" << m_size << std::endl;
+    }
+    // 拷贝构造函数
+    Holder(const Holder &other)
+    {
+
+        m_data = new int[other.m_size];                               // (1)
+        std::copy(other.m_data, other.m_data + other.m_size, m_data); // (2)
+        m_size = other.m_size;
+        std::cout << "拷贝构造函数" << m_size << std::endl;
+    }
+
+    // 赋值函数
+    Holder &operator=(const Holder &other)
+    {
+        if (this == &other) 
+            return *this; // (1) 避免了将自己赋值给自己, 其实不判断也可以只是多操作了内存, 纯属性能优化
+        delete[] m_data;  // (2)在这里释放掉对象的堆区内存, 让左值
+        m_data = new int[other.m_size];
+        std::copy(other.m_data, other.m_data + other.m_size, m_data);
+        m_size = other.m_size;
+        std::cout << "重载=符" << m_size << std::endl;        
+        return *this; // (3)
+    }        
+
+    // 移动构造函数
+    Holder(Holder &&other) noexcept
+    {
+        m_data = other.m_data;
+        m_size = other.m_size;
+        other.m_data = nullptr;
+        other.m_size = 0;
+        std::cout << "移动构造函数" << m_size << std::endl;        
+    }
+
+    // 移动赋值函数
+    Holder &operator=(Holder &&other) noexcept // <-- rvalue reference in input
+    {
+        if (this == &other)
+            return *this;
+
+        delete[] m_data; // 释放对象变量的堆区数据,防止内存泄漏
+
+        m_data = other.m_data; // 偷取右值的堆区指针
+        m_size = other.m_size; // 偷取右值的堆区指针长度
+
+        other.m_data = nullptr; // 完成偷取动作,不让右值持有堆区指针,防止右值释放, 比如临时变量
+        other.m_size = 0;      // 完成偷取动作, 取缔右值的功能
+        std::cout << "移动赋值函数" << m_size << std::endl;        
+        return *this;
+    }
+
+    ~Holder() // Destructor
+    {
+        std::cout << "析构函数" << m_size << std::endl;
+        delete[] m_data;
+    }
+
+private:
+    int *m_data;
+    size_t m_size;
+};
+
+
+Holder createHolder(int size)
+{
+    // 如果没有实现移动构造函数, 会调用拷贝构造函数, 多次拷贝浪费性能
+    return Holder(size);
+}
+
+int main()
+{
+    Holder h1(1000);                // 正常构造
+    Holder h2(h1);                  // 拷贝构造
+    Holder h3 = createHolder(2000); // 移动构造
+
+    h2 = h3;                        // 赋值函数
+    h2 = createHolder(500);         // 移动赋值函数
+
+    // 默认情况下，左值初始化同类对象只能通过拷贝构造函数完成，如果想调用移动构造函数，则必须使用右值进行初始化。cpp11引入std::move() 函数
+    // 标准库中的工具函数std::move，你可以移动左值。它被用来将左值转化为右值，假设我们想要从一个左值盗取数据：
+    // Holder h4(std::move(h1));  // 实现了左值初始化同类对象通过移动构造函数了, 这个时候h1就被偷取数据, 一般来说h1就不能完成正常的功能了比如指针被设置nullptr
+    return 0;
+}
+```
+
+
+

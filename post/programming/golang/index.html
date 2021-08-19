@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/post/programming/golang/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Golang">
 <meta itemprop="description" content="Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e"><meta itemprop="datePublished" content="2020-08-05T23:08:00+08:00" />
 <meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
-<meta itemprop="wordCount" content="4091">
+<meta itemprop="wordCount" content="6782">
 <meta itemprop="keywords" content="Syntax,Golang," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang"/>
 <meta name="twitter:description" content="Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e"/>
@@ -151,7 +151,10 @@
         <li><a href="#重点语法">重点语法</a>
           <ul>
             <li><a href="#golang中的比较">golang中的比较</a></li>
-            <li><a href="#golan静态链接">golan静态链接</a></li>
+            <li><a href="#golang的内存屏障案例">golang的内存屏障案例</a></li>
+            <li><a href="#gpm模型">GPM模型</a></li>
+            <li><a href="#golang的cgo和动静态链接">golang的CGO和动静态链接</a></li>
+            <li><a href="#go编译动态库">GO编译动态库</a></li>
             <li><a href="#切片的删除">切片的删除</a></li>
             <li><a href="#golang-阻塞">Golang 阻塞</a></li>
             <li><a href="#定时器">定时器</a></li>
@@ -267,13 +270,71 @@
 <p><strong>同一个文件夹中包名只能有一个,不能出现多个</strong></p>
 </li>
 <li>
-<p><strong>函数和成员和方法名大小写决定包外可见行类似 public 和 private</strong></p>
+<p><strong>type定义的结构体或者新类型只能在其所在包中接收方法，包外不可以接收方法</strong></p>
 </li>
+<li>
+<p><strong>常量、变量、类型、接口、结构体、函数、等名称大小写决定包外可见行类似 public 和 private</strong></p>
+</li>
+<li>
+<p><strong>结构体的方法优先级高于匿名结构体或者匿名接口的方法，可以模拟继承</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">I</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="kd">func</span> <span class="nf">A</span><span class="p">()</span>
+	<span class="kd">func</span> <span class="nf">B</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">son</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="kd">func</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">son</span><span class="p">)</span> <span class="nf">A</span><span class="p">()</span> <span class="p">{}</span>
+<span class="kd">func</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">son</span><span class="p">)</span> <span class="nf">B</span><span class="p">()</span> <span class="p">{}</span>
+
+<span class="kd">type</span> <span class="nx">parent</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">I</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">parent</span><span class="p">)</span> <span class="nf">A</span><span class="p">()</span> <span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>
 <p><strong>函数返回值如果只有一个类型,可以只写类型，如果多个类型必须括号包裹起来，如果返回值中有一命名返回值，其余参数必须全部命名</strong></p>
 </li>
 <li>
-<p><strong>chan, map, slice需要make初始化才能用, slice可以用apend初始化</strong></p>
+<p><strong>golang的time.parse使用的utc时区，可以指定时区格式化, time.Format默认使用的本地时区</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">time</span><span class="p">.</span><span class="nf">ParseInLocation</span><span class="p">(</span><span class="s">&#34;2006-01-02 15:04:05&#34;</span><span class="p">,</span> <span class="s">&#34;2017-12-03 22:01:02&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Local</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>chan, map, slice变量为nil需要make分配空间才能用, slice可以用apend初始化空间, slice和map能用字面量声明来快速分配空间</strong></p>
+</li>
+<li>
+<p><strong>for range遍历slice是判断切片的len长度这里需要小心，cap容量可以大，len最好为0通过append追加</strong></p>
 </li>
 <li>
 <p><strong>delete函数用来删除map键值</strong></p>
@@ -291,8 +352,28 @@
 <p><strong>给 nil chan 发送接收都会导致阻塞，可以用来阻塞 main 协程</strong></p>
 </li>
 <li>
-<p><strong>select随机选取通道执行一次用来处理通道 io，除了defalt其他都必须读写 chan,空select阻塞协程</strong></p>
+<p><strong>select随机选取通道执行一次用来处理通道 io，除了defalt其他都必须读写 chan,空select阻塞协程, for循环select在进入该语句时，会按源码的顺序对每一个 case 子句进行求值：这个求值只针对发送或接收操作的额外表达式,time.After每次返回一个chan Time导致内存泄漏</strong></p>
 </li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">	<span class="k">for</span> <span class="p">{</span>
+		<span class="k">select</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">ch</span><span class="p">:</span> <span class="c1">// 会跳出select导致然后for循环又进入select重新计算time.After生成一个新的通道从而内存泄漏
+</span><span class="c1"></span>		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span> <span class="o">*</span> <span class="mi">3</span><span class="p">):</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>
 <p><strong>if语句块会遮挡外部定义的变量如命名返回值,导致 bug 所以变量尽量定义到外面</strong></p>
 </li>
@@ -318,7 +399,10 @@
 <p><strong>两个接口拥有相同的方法列表，方法次序可以不同，那么他们就是等价可以相互赋值，接口 A 是接口 B 的子级，B 可以赋值给 A</strong></p>
 </li>
 <li>
-<p><strong>类型实现接口函数就实现了接口, 类型实现接口如果方法接受者是指针,那么接口变量只能是存储这个类型的指针</strong></p>
+<p><strong>类型实现接口接收者是指针,那么只有该变量的指针能赋值给接口类型变量，结构体是否实现接口需要综合成员的匿名结构体或者接口来看是否满足接口的所有方法</strong></p>
+</li>
+<li>
+<p><strong>Go语言中规定，只有类型（Type）和指向他们的指针（*Type）才是可能会出现在接收器声明里的两种接收器，为了避免歧义，明确规定，新类型是指针，接口是不能出现在接收器</strong></p>
 </li>
 <li>
 <p><strong>除了nil任何值赋值给接口那么这个接口不再是nil,即使是一个nil初始值的引用类型</strong></p>
@@ -337,6 +421,9 @@
 </div><ul>
 <li>
 <p><strong>switch type 和.(类型)判断只能是接口变量才能编译通过,因为只有接口实际隐藏了变量的其他类型只保留接口方法调用相等于泛化了</strong></p>
+</li>
+<li>
+<p><strong>os.OpenFile如果不设置flag(不是文件的权限), 那么就不能读写文件进去也不会报错</strong></p>
 </li>
 <li>
 <p><strong>panic 只能本协程栈层层返回,所以为了不让程序崩溃, web协程最好 defer recover 恢复 panic, 多次panic只有最后一个panic被recover</strong></p>
@@ -367,13 +454,212 @@
 <p><strong>不同类型的比较会编译不过去, 注意不同名称接口如果内部方法一模一样是同类型, 用接口接收比较会先比较类型,然后比较类型的值,如果类型不可比较类型会panic</strong></p>
 </li>
 </ul>
-<h3 id="golan静态链接">golan静态链接</h3>
+<h3 id="golang的内存屏障案例">golang的内存屏障案例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">y</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">{</span>
+			<span class="nx">y</span><span class="o">++</span>
+		<span class="p">}</span>
+	<span class="p">}()</span>
+	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 最后打印的永远是0, 默认运行等于GCC -O2级别的优化, 会寄存器级别优化，值会停留在寄存器平不会刷入cpu cache
+</span><span class="c1">// 解决办法: C/CPP的volatile是告诉编译器不要对这个变量的变化实时写入cache,
+</span><span class="c1">// 但是因为L1上还有store buffer所以内存屏障的问题,需要使用封装了汇编指令的函数刷入cpu cache(mutex)
+</span><span class="c1">// golang的方法也是同理, 使用happens-before的几条原则比如互斥锁和通道, 原理我猜测是通道或者互斥锁加入了读写屏障
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="gpm模型">GPM模型</h3>
+<ul>
+<li>**GPM模型，关于M的数量分析。Go 语言通过 Syscall 和 Rawsyscall 等使用汇编语言编写的方法封装了操作系统提供的所有系统调</li>
+</ul>
+<ol>
+<li>由于原子、互斥量或通道操作调用导致 Goroutine 阻塞，调度器将把当前阻塞的 Goroutine 切换出去，重新调度 LRQ 上的其他 Goroutine；并不会增加M的数量，golang并没有使用内核的互斥锁，所以并不会导致M陷入内核从而导致被golang开辟新的M。</li>
+<li>如果在 Goroutine 去执行一个 sleep 操作，导致 M 被阻塞了。Go 程序后台有一个监控线程 sysmon，它监控那些长时间运行的 G 任务然后设置可以强占的标识符，别的 Goroutine 就可以抢先进来执行。并不会增加M的数量</li>
+<li>由于网络请求和 IO 操作导致 Goroutine 阻塞。Go 程序提供了网络轮询器（NetPoller）来处理网络请求和 IO 操作的问题，其后台通过 kqueue（MacOS），epoll（Linux）或 iocp（Windows）来实现 IO 多路复用。通过使用 NetPoller 进行网络系统调用，调度器可以防止 Goroutine 在进行这些系统调用时阻塞 M。这可以让 M 执行 P 的 LRQ 中其他的 Goroutines，而不需要创建新的 M。执行网络系统调用不需要额外的 M，网络轮询器使用系统线程，它时刻处理一个有效的事件循环，有助于减少操作系统上的调度负载。用户层眼中看到的 Goroutine 中的“block socket”，实现了 goroutine-per-connection 简单的网络编程模式。实际上是通过 Go runtime 中的 netpoller 通过 Non-block socket + I/O 多路复用机制“模拟”出来的。这个时候并不会增加M的数量。</li>
+<li>当调用一些系统方法的时候（如文件 I/O），如果系统方法调用的时候发生阻塞，这种情况下，网络轮询器（NetPoller）无法使用，而进行系统调用的 G1 将阻塞当前 M1。调度器引入 其它M 来服务 M1 的P。会增加M的数量，因为陷入内核等待响应。</li>
+</ol>
+<ul>
+<li><strong>sysmon协程的作用</strong></li>
+</ul>
+<ol>
+<li>检查死锁runtime.checkdead</li>
+<li>运行计时器 — 获取下一个需要被触发的计时器；</li>
+<li>定时从 netpoll 中获取 ready 的协程</li>
+<li>Go 的抢占式调度
+当 sysmon 发现 M 已运行同一个 G（Goroutine）10ms 以上时，它会将该 G 的内部参数 preempt 设置为 true。然后，在函数序言中，当 G 进行函数调用时，G 会检查自己的 preempt 标志，如果它为 true，则它将自己与 M 分离并推入“全局队列”。由于它的工作方式（函数调用触发），在 for{} 的情况下并不会发生抢占，如果没有函数调用，即使设置了抢占标志，也不会进行该标志的检查。Go1.14 引入抢占式调度（使用信号的异步抢占机制），sysmon 仍然会检测到运行了 10ms 以上的 G（goroutine）。然后，sysmon 向运行 G 的 P 发送信号（SIGURG）。Go 的信号处理程序会调用P上的一个叫作 gsignal 的 goroutine 来处理该信号，将其映射到 M 而不是 G，并使其检查该信号。gsignal 看到抢占信号，停止正在运行的 G。</li>
+<li>在满足条件时触发垃圾收集回收内存；</li>
+<li>打印调度信息,归还内存等定时任务.</li>
+</ol>
+<h3 id="golang的cgo和动静态链接">golang的CGO和动静态链接</h3>
+<p>CGO_ENABLED是控制是否开启C和GO混合编译,如果=0就是关闭,自然全是go代码自然是静态链接</p>
+<p>CGO_ENABLED=1,开启C和GO混合编译自然有静态链接和动态链接之分</p>
+<p>如果代码有C代码比如(net, os/user)等几个包的cgo代码, 就算C代码不依赖任何库, 默认会动态链接c库,如果加入<code>-ldflags '-extldflags &quot;-static&quot;'</code>会进行静态链接C库,
+经测试如果静态链接C的库有的库会报错,可能某些方法只存在C的动态库中</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">go build -ldflags <span class="s1">&#39;-linkmode &#34;external&#34; -extldflags &#34;-static&#34;&#39;</span> .
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 静态链接C库</span>
+go build -ldflags <span class="s1">&#39;-linkmode &#34;external&#34; -extldflags &#34;-static&#34;&#39;</span> .
+<span class="c1"># 关闭CGO，纯go语言构建</span>
+<span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> go build .
+<span class="c1"># 官方镜像构建go程序, 也可以用go mod vendor先导入依赖</span>
+sudo nerdctl run -it --rm --env <span class="nv">GOPROXY</span><span class="o">=</span>https://mirrors.cloud.tencent.com/go/ -v /home/x/go/:/go/ -v /home/x/workspace/go/go-demo:/home/app -w /home/app golang:1.17.0-buster bash
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ps1" data-lang="ps1"><span class="c">### CMD</span>
+<span class="c"># set GOARCH=amd64</span>
+<span class="c"># set GOOS=linux</span>
+<span class="c"># set CGO_ENABLE=0</span>
+
+<span class="c">### ps1</span>
+<span class="c"># $env:GOOS=&#34;linux&#34;</span>
+<span class="c"># $env:GOARCH=&#34;amd64&#34;</span>
+<span class="c"># $env:CGO_ENABLE=&#34;0&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="go编译动态库">GO编译动态库</h3>
+<p>go调用c库是常规操作，可以反过来让c调go的动态库
+动态库代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span> <span class="c1">// 这个文件一定要在main包下面
+</span><span class="c1"></span>
+<span class="kn">import</span> <span class="s">&#34;C&#34;</span> <span class="c1">// 这个 import 也是必须的，有了这个才能生成 .h 文件
+</span><span class="c1">// 下面这一行不是注释，是导出为SO库的标准写法，注意 export前面不能有空格！！！
+</span><span class="c1">//export hello
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">hello</span><span class="p">(</span><span class="nx">value</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">C</span><span class="p">.</span><span class="nx">char</span> <span class="p">{</span> <span class="c1">// 如果函数有返回值，则要将返回值转换为C语言对应的类型
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">C</span><span class="p">.</span><span class="nf">CString</span><span class="p">(</span><span class="s">&#34;hello&#34;</span> <span class="o">+</span> <span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// 此处一定要有main函数，有main函数才能让cgo编译器去把包编译成C的库
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>构建动静态库命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 动态库</span>
+go build -buildmode<span class="o">=</span>c-shared -o hello.so .
+<span class="c1"># 静态库</span>
+go build -buildmode<span class="o">=</span>c-archive -o hello.so .
+</code></pre></td></tr></table>
+</div>
+</div><p>C代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;hello.h&#34; // 此处为上一步生成的.h文件</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">c1</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;did&#34;</span><span class="p">;</span>
+    <span class="n">GoString</span> <span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="n">c1</span><span class="p">,</span><span class="n">strlen</span><span class="p">(</span><span class="n">c1</span><span class="p">)};</span><span class="c1">// 构建go类型
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">hello</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;r:%s&#34;</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>C链接动态库并运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 动态库</span>
+gcc -o main main.c hello.so
+<span class="c1"># 静态库(go的静态库需要连接pthread)</span>
+gcc -o main main.c hello.a -lpthread
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="切片的删除">切片的删除</h3>
@@ -465,7 +751,7 @@
 	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;第二种方式.apend直接将底层的数据结构向开头移动生成新的切片赋值给原变量. 只拷贝操作，只是省内存,移动底层结构会影响其他切片和数组&#34;</span><span class="p">)</span>
 	<span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
 		<span class="nx">a</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
-		<span class="nx">a</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">0</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span> <span class="c1">//appen能初始化切片不一定需要make初始化
+		<span class="nx">a</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">0</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span> <span class="c1">//append能初始化切片不一定需要make初始化
 </span><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
 	<span class="p">}()</span>
 
@@ -861,7 +1147,7 @@
 	<span class="nx">fd</span><span class="p">.</span><span class="nf">Sync</span><span class="p">()</span>
 	<span class="nx">fd</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
 
-	
+
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -950,7 +1236,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

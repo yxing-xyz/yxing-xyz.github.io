@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on 何年重遇天涯</title>
+    <link>/tags/sql/</link>
+    <description>Recent content in SQL on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 Nov 2021 21:27:00 +0800</lastBuildDate><atom:link href="/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL</title>
+      <link>/post/programming/sql/</link>
+      <pubDate>Fri, 26 Nov 2021 21:27:00 +0800</pubDate>
+      
+      <guid>/post/programming/sql/</guid>
+      <description>MySQL 预编译批量插入 当预编译批量插入的时候数据量太大MySQL服务器会报错, 还是直接拼values的sql吧 1 Error 1390: Prepared statement contains too many placeholders 查询所有数据库占用</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,31 +6,103 @@
     <description>Recent content in Tags on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 18 Aug 2021 21:56:00 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Dec 2021 14:58:00 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Elisp</title>
-      <link>/tags/elisp/</link>
-      <pubDate>Wed, 18 Aug 2021 21:56:00 +0800</pubDate>
+      <title>Algorithm</title>
+      <link>/tags/algorithm/</link>
+      <pubDate>Thu, 23 Dec 2021 14:58:00 +0800</pubDate>
       
-      <guid>/tags/elisp/</guid>
+      <guid>/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>/tags/sql/</link>
+      <pubDate>Fri, 26 Nov 2021 21:27:00 +0800</pubDate>
+      
+      <guid>/tags/sql/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Syntax</title>
       <link>/tags/syntax/</link>
-      <pubDate>Wed, 18 Aug 2021 21:56:00 +0800</pubDate>
+      <pubDate>Fri, 26 Nov 2021 21:27:00 +0800</pubDate>
       
       <guid>/tags/syntax/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Business logic</title>
+      <link>/tags/business-logic/</link>
+      <pubDate>Sun, 14 Nov 2021 13:20:00 +0800</pubDate>
+      
+      <guid>/tags/business-logic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>middleware</title>
+      <link>/tags/middleware/</link>
+      <pubDate>Sun, 14 Nov 2021 13:20:00 +0800</pubDate>
+      
+      <guid>/tags/middleware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Sun, 31 Oct 2021 09:20:00 +0800</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>note</title>
       <link>/tags/note/</link>
-      <pubDate>Sat, 10 Jul 2021 12:32:00 +0800</pubDate>
+      <pubDate>Sat, 18 Sep 2021 16:21:00 +0800</pubDate>
       
       <guid>/tags/note/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C</title>
+      <link>/tags/c/</link>
+      <pubDate>Tue, 31 Aug 2021 10:29:00 +0800</pubDate>
+      
+      <guid>/tags/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Tue, 31 Aug 2021 10:29:00 +0800</pubDate>
+      
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rust</title>
+      <link>/tags/rust/</link>
+      <pubDate>Tue, 31 Aug 2021 10:29:00 +0800</pubDate>
+      
+      <guid>/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Elisp</title>
+      <link>/tags/elisp/</link>
+      <pubDate>Wed, 18 Aug 2021 21:56:00 +0800</pubDate>
+      
+      <guid>/tags/elisp/</guid>
       <description></description>
     </item>
     
@@ -80,47 +152,11 @@
     </item>
     
     <item>
-      <title>Algorithm</title>
-      <link>/tags/algorithm/</link>
-      <pubDate>Fri, 16 Oct 2020 15:28:00 +0800</pubDate>
-      
-      <guid>/tags/algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Redis</title>
       <link>/tags/redis/</link>
       <pubDate>Fri, 16 Oct 2020 10:16:00 +0800</pubDate>
       
       <guid>/tags/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>/tags/linux/</link>
-      <pubDate>Fri, 07 Aug 2020 21:27:00 +0800</pubDate>
-      
-      <guid>/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>/tags/golang/</link>
-      <pubDate>Wed, 05 Aug 2020 23:08:00 +0800</pubDate>
-      
-      <guid>/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C</title>
-      <link>/tags/c/</link>
-      <pubDate>Thu, 14 May 2020 20:06:39 +0800</pubDate>
-      
-      <guid>/tags/c/</guid>
       <description></description>
     </item>
     
@@ -139,6 +175,15 @@
       <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTTP</title>
+      <link>/tags/http/</link>
+      <pubDate>Tue, 27 Aug 2019 17:28:00 +0800</pubDate>
+      
+      <guid>/tags/http/</guid>
       <description></description>
     </item>
     

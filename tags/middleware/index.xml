@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>middleware on 何年重遇天涯</title>
+    <link>/tags/middleware/</link>
+    <description>Recent content in middleware on 何年重遇天涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 14 Nov 2021 13:20:00 +0800</lastBuildDate><atom:link href="/tags/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>中间件</title>
+      <link>/post/programming/mq/</link>
+      <pubDate>Sun, 14 Nov 2021 13:20:00 +0800</pubDate>
+      
+      <guid>/post/programming/mq/</guid>
+      <description>Redis redis集群版的lua脚本使用会有一致性问题, 需要确保处理的参数在一个slot下从而保证lua执行的单线程 RocketMQ 事物消息 事物消息是发送一个半</description>
+    </item>
+    
+  </channel>
+</rss>

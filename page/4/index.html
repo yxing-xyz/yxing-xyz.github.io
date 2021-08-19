@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/" />
@@ -126,30 +126,51 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/programming/js_prototype/">JavaScript Prototype</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/linux/debian/">Linux Mirrors</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-10-16 </span>
+      <span class="post-time"> 2020-12-08 </span>
       <div class="post-category">
-          <a href="/categories/programming/"> Programming  </a>
+          <a href="/categories/linux/"> Linux </a>
           </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      继承 实现方法一 缺点：调用两次父类构造函数，性能开销 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 function Person(name, age) { (this.name = name), (this.age = age); this.setAge = function () {}; } Person.prototype.setAge = function () { console.log(&#34;111&#34;);
+      Debian Mirrors 将cloud.aliyuncs是阿里云ECS内部加速地址，换成aliyun就是互联网地址 1 sed -i &#39;s#\w*\.debian\.org#mirrors\.163\.com#g&#39; /etc/apt/sources.list debian 10 buster 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
     </div>
     <div class="read-more">
-      <a href="/post/programming/js_prototype/" class="read-more-link">阅读更多</a>
+      <a href="/post/linux/debian/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/programming/js_utils/">JavaScript Utils</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/map_electronic_fence/">Map electronic fence</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-08-27 </span>
+      <span class="post-time"> 2020-10-16 </span>
+      <div class="post-category">
+          <a href="/categories/algorithm/"> Algorithm </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      地图围栏算法 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/map_electronic_fence/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/programming/redis_note/">Redis notes</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-10-16 </span>
       <div class="post-category">
           <a href="/categories/programming/"> Programming </a>
           </div>
@@ -158,61 +179,40 @@
   
   <div class="post-content">
     <div class="post-summary">
-      XMLHttpRequest 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 var xhr = new XMLHttpRequest(); xhr.open(&#39;GET&#39;, &#39;https://test.juewei.com/a-service&#39;); xhr.setRequestHeader(&#34;name&#34;, &#34;yx&#34;); xhr.send(null); xhr.onload = function(e) { var xhr = e.target; console.log(xhr.responseText); } // 测试后端优雅重启 setInterval(() =&gt; { var xhr = new XMLHttpRequest() xhr.open(&#34;GET&#34;, &#34;https://dev.juewei.com/order/actuator/health&#34;); // xhr.open(&#34;GET&#34;, &#34;https://jrs-test.juewei.com/configs.js&#34;)
+      Redis notes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 连接 redis-cli -h host -p port -a &#39;password&#39; # 地图经纬度半径查询 GEORADIUS SHOP:COORDINATES 112.936512 28.210319 5000 m WITHCOORD WITHDIST COUNT 20 ASC # 模糊搜索KEY KEYS user_id_* # 模糊清楚KEY redis-cli -h &#39;host&#39; -p port
     </div>
     <div class="read-more">
-      <a href="/post/programming/js_utils/" class="read-more-link">阅读更多</a>
+      <a href="/post/programming/redis_note/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/configure/linux_conf/">Linux Configuration</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/linux/su_sudo/">The difference between su and sudo in Linux</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2018-09-01 </span>
+      <span class="post-time"> 2020-08-07 </span>
       <div class="post-category">
-          <a href="/categories/configure/"> Configure </a>
+          <a href="/categories/linux/"> Linux </a>
           </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Arch 软件包 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66
+      su su 是一种切换身份的命令操作,我猜测是解析参数验证用户名密码执行身份的默认 bash,。 -i 参数是使 shell 成登录 shell,这样就会切换工作目录到$
     </div>
     <div class="read-more">
-      <a href="/post/configure/linux_conf/" class="read-more-link">阅读更多</a>
+      <a href="/post/linux/su_sudo/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/docker/">Docker</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/programming/golang/">Golang</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2018-06-21 </span>
-      <div class="post-category">
-          <a href="/categories/devops/"> DevOps </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/docker/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/programming/data_type/">Data Type</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-06-18 </span>
+      <span class="post-time"> 2020-08-05 </span>
       <div class="post-category">
           <a href="/categories/programming/"> Programming </a>
           </div>
@@ -221,10 +221,10 @@
   
   <div class="post-content">
     <div class="post-summary">
-      C 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 整形: short int long 数值类型: 浮点类型: float double 基本数据类型: 字符类型: char 空类型(void) 指针类型 构
+      Golang 知识点 声明变量 var 可以不用初始化,var 声明初始化可以省略类型,简短声明左边必须有一个未声明变量且右边必须初始化 1 2 3 var a, b, c int var d = 1 d, e
     </div>
     <div class="read-more">
-      <a href="/post/programming/data_type/" class="read-more-link">阅读更多</a>
+      <a href="/post/programming/golang/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -282,7 +282,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

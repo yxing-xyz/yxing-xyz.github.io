@@ -6,7 +6,16 @@
     <description>Recent content in DevOps on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 10 Jul 2021 12:32:00 +0800</lastBuildDate><atom:link href="/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Oct 2021 17:52:00 +0800</lastBuildDate><atom:link href="/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Kernel Module</title>
+      <link>/post/devops/kernel-module/</link>
+      <pubDate>Fri, 08 Oct 2021 17:52:00 +0800</pubDate>
+      
+      <guid>/post/devops/kernel-module/</guid>
+      <description>Linux模块加载 模块保存在/lib/modules/下。 使用/etc/modules-load.d/来配置系统启动时加载哪些模块。 使用/e</description>
+    </item>
+    
     <item>
       <title>运维笔记</title>
       <link>/post/devops/note/</link>
@@ -22,7 +31,7 @@
       <pubDate>Wed, 16 Jun 2021 20:00:00 +0800</pubDate>
       
       <guid>/post/devops/bash_utils/</guid>
-      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &amp;#34;*.log&amp;#34; -type f -size 1M</description>
+      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书</description>
     </item>
     
     <item>

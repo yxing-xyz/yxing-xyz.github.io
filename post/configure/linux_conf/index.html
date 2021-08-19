@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/post/configure/linux_conf/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Linux Configuration">
 <meta itemprop="description" content="Arch 软件包 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66"><meta itemprop="datePublished" content="2018-09-01T09:51:36+08:00" />
 <meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
-<meta itemprop="wordCount" content="2615">
+<meta itemprop="wordCount" content="3091">
 <meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux Configuration"/>
 <meta name="twitter:description" content="Arch 软件包 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66"/>
@@ -150,7 +150,10 @@
         <li><a href="#arch-软件包">Arch 软件包</a></li>
         <li><a href="#archlinux">ArchLinux</a></li>
         <li><a href="#linux">Linux</a></li>
+        <li><a href="#录屏">录屏</a></li>
         <li><a href="#linux-xorg">Linux Xorg</a></li>
+        <li><a href="#投影">投影</a></li>
+        <li><a href="#zsh">zsh</a></li>
       </ul>
     </li>
   </ul>
@@ -388,6 +391,14 @@
 </span><span class="lnt">225
 </span><span class="lnt">226
 </span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/usr/bin/env bash
@@ -397,224 +408,232 @@
 <span class="nb">set</span> -o pipefail
 <span class="c1">################################</span>
 <span class="c1"># 安装图形界面                     剪切板 窗口特效 合并X11配置</span>
-pacman -S xorg-server xorg-xinit xclip picom xorg-xrdb  xorg-xinput xsel--needed --noconfirm
+pacman -S xorg-server xorg-xinit xclip picom xorg-xrdb  xorg-xinput xsel --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># awesome</span>
-pacman -S awesome --needed --noconfirm
+pacman -S awesome --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
+
 <span class="c1"># 清除密码 gnome-keyring-daemon -r -d</span>
-pacman -S gnome-keyring
+pacman -S gnome-keyring --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1"># 导入CPG key/</span>
-pacman -S archlinux-keyring --needed --noconfirm
-pacman -S archlinuxcn-keyring --needed --noconfirm
-<span class="c1"># 安装 yay       降级</span>
-pacman -Syu yay downgrade --needed --noconfirm
+pacman -S archlinux-keyring --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
+pacman -S archlinuxcn-keyring --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
+<span class="c1"># 安装 yay       降级 </span>
+pacman -Syu yay downgrade --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1"># 常用开发工具</span>
-pacman -S yasm gcc cmake nginx php php-apache composer jdk8 gradle maven nodejs npm yarn git tig svn python python-pip go go-tools --needed --noconfirm --force
+pacman -S yasm gcc cmake nginx nodejs npm yarn git tig svn python python-pip go go-tools rust rust-src --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 编辑</span>
-pacman -S emacs vim visual-studio-code-bin intellij-idea-ultimate-edition --needed --noconfirm --force
+pacman -S emacs vim visual-studio-code-bin intellij-idea-ultimate-edition --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># nodejs应用进程管理器</span>
-pacman -S pm2 --needed --noconfirm --force
+pacman -S pm2 --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 打印进程调用</span>
-pacman -S strace --needed --noconfirm --force
+pacman -S strace --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 数据库命令行</span>
-yay -S iredis mycli pgcli-git litecli --needed --noconfirm --force
+yay -S iredis mycli pgcli-git litecli --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 手册</span>
-yay -S cheat-git tldr --needed --noconfirm --force
+yay -S cheat-git tldr man-pages man-pages-zh_cn--needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 代码行数统计</span>
-pacman -S cloc --needed --noconfirm --force
+pacman -S cloc --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># shell脚本检查</span>
-pacman -S shellcheck --needed --noconfirm --force
+pacman -S shellcheck --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1"># k8s</span>
-pacman -S k9s helm tekton-cli --needed --noconfirm --force
+pacman -S k9s helm tekton-cli --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1">############# 虚拟机相关 ##############</span>
 <span class="c1"># rdesktop -f 222.240.148.238:50010 -u administrator -p hngat2015 -a 32 -r clipboard:PRIMARYCLIPBOARD -r disk:h=/home/x</span>
 <span class="c1"># x0vncserver -display :0 -passwordfile ~/.vnc/passwd</span>
 <span class="c1"># xfreerdp /bpp:32 /gfx +aero +fonts /d:192.168.44.118 /u:x /p:x /v:192.168.44.118</span>
 <span class="c1">#         启动vnc服务端 win远程桌面客户端</span>
-pacman -S tigervnc freerdp --needed --noconfirm --force
+pacman -S tigervnc freerdp --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 
 <span class="c1">############## 资源监控 ###############</span>
 <span class="c1"># 硬件信息lshw lscpu lsblk lspci 模块 lsmod 模块信息modinfo dmi信息解码 smartmontools磁盘信息</span>
-pacman -S lshw hardinfo dmidecode --needed smartmontools --noconfirm --force
+pacman -S lshw hardinfo dmidecode --needed smartmontools --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 系统信息</span>
-pacman -S neofetch --needed --noconfirm --force
+pacman -S neofetch --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 实时查看网络、cpu、内存、磁盘等多功能实时监控, sysstat多单功能瞬时查看</span>
-pacman -S nmon dstat sysstat --needed --noconfirm --force
+pacman -S nmon dstat sysstat --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 资源监控</span>
-pacman -S glances htop --needed --noconfirm --force
+pacman -S glances htop --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 实时cpu监控</span>
-pacman -S s-tui --needed --noconfirm --force
+pacman -S s-tui --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 
 <span class="c1">##################  net工具 ##############</span>
 <span class="c1"># ifconfig、route在net-tools包中，nslookup、dig在dnsutils包中，ftp、telnet等在inetutils包中，ip命令在iproute2包中</span>
 pacman -S net-tools dnsutils inetutils iproute2 bridge-utils --needed --noconfirm
-<span class="c1"># 网卡网速监控 conntrack-tools查看连接跟踪, ipvsadm查看ipvs</span>
-pacman -S bmon bwm-ng nload iftop conntrack-tools ipvsadm --needed --noconfirm --force
+<span class="c1"># 网卡网速监控 conntrack-tools:  conntrack -L -j查看连接跟踪, ipvsadm查看ipvs aircrack-ng 网卡混合监听和破解wifi密码</span>
+pacman -S bmon bwm-ng nload iftop conntrack-tools ipvsadm aircrack-ng --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 进程统计网络带宽</span>
-pacman -S nethogs --needed --noconfirm --force
+pacman -S nethogs bandwhich --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 查看ip连接 端口扫描namp、端口netcat、端口数据发送端口转发socat、http测试 nmap -Pn -v -A www.baidu.com  -p 0-10000</span>
-pacman -S iptstate nmap openbsd-netcat socat httpie --needed --noconfirm --force
+pacman -S iptstate nmap openbsd-netcat socat httpie --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 测试本机发送tcp/udp最大带宽 时延 丢包, 路由测试工具mtr</span>
-pacman -S iperf mtr --needed --noconfirm --force
+pacman -S iperf mtr --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 抓包</span>
-pacman -S iptraf-ng wireshark-qt wireshark-gtk ngrep --needed --noconfirm --force
+pacman -S iptraf-ng wireshark-qt wireshark-gtk ngrep --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 内网穿透</span>
 <span class="c1"># sshuttle --dns -vr root@114.215.181.234 192.168.0.0/16 --ssh-cmd &#39;ssh -i /home/x/workspace/juewei/k8s/cert/品牌中心密钥对.key&#39;</span>
-pacman -S frp localtunnel sshuttle --needed --noconfirm --force
-<span class="c1"># wifi</span>
-pacman -S networkmanager --needed --noconfirm --force
-nmcli  dev wifi list
+pacman -S frp localtunnel sshuttle --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
+<span class="c1"># 网络管理服务, 界面和插件</span>
+pacman -S networkmanager network-manager-applet networkmanager-openvpn networkmanager-strongswan --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
+nmcli dev wifi list
 nmcli device wifi connect <span class="s2">&#34;x&#34;</span> password <span class="s2">&#34;qwer1234&#34;</span>
-nmcli connection import <span class="nb">type</span> openvpn file file.ovpn
+nmcli connection import <span class="nb">type</span> openvpn file openvpn.ovpn
 <span class="c1">################## 磁盘和文件系统工具 ###############</span>
 <span class="c1"># 进程磁盘读写监控iotop  磁盘和cpu负载iostat</span>
-pacman -S iotop --needed --noconfirm --force
+pacman -S iotop --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 查看磁盘使用</span>
-pacman -S ncdu --needed --noconfirm --force
+pacman -S ncdu --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 文件系统扩容 resize2fs fsck检查文件系统错误</span>
-pacman -S e2fsprogs --needed --noconfirm --force
+pacman -S e2fsprogs --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 文件读写测试</span>
-pacman -S fio --needed --noconfirm --force
+pacman -S fio --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1">################### 终端神器 #####################</span>
 <span class="c1"># shell</span>
-pacman -S zsh --needed --noconfirm --force
+pacman -S zsh --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端复用</span>
-pacman -S tmux --needed --noconfirm --force
+pacman -S tmux --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端文件管理</span>
-pacman -S ranger vifm nnn mc --needed --noconfirm --force <span class="c1"># 终端文件管理</span>
-pacman -S atool --needed --noconfirm --force              <span class="c1"># 用于预览各种压缩文件</span>
-pacman -S highlight --needed --noconfirm --force          <span class="c1"># 用于在预览代码，支持多色彩高亮显示代码</span>
-pacman -S w3m --needed --noconfirm --force                <span class="c1"># lynx, w3m 或 elinks：这三个东西都是命令行下的网页浏览器，都用于htm</span>
-pacman -S poppler poppler-data --needed --noconfirm --force            <span class="c1"># PDF阅读</span>
-pacman -S mediainfo --needed --noconfirm --force          <span class="c1"># mediainfo 或 perl-image-exiftool ： audio/video</span>
+pacman -S ranger vifm nnn mc --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span> <span class="c1"># 终端文件管理</span>
+pacman -S atool --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>              <span class="c1"># 用于预览各种压缩文件</span>
+pacman -S highlight --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>          <span class="c1"># 用于在预览代码，支持多色彩高亮显示代码</span>
+pacman -S w3m --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>                <span class="c1"># lynx, w3m 或 elinks：这三个东西都是命令行下的网页浏览器，都用于htm</span>
+pacman -S poppler poppler-data --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>            <span class="c1"># PDF阅读</span>
+pacman -S mediainfo --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>          <span class="c1"># mediainfo 或 perl-image-exiftool ： audio/video</span>
 <span class="c1"># nnn</span>
-sudo pacman -S nnn atool libarchive trash-cli sshfs rclone fuse2 xdg-utils
-
+sudo pacman -S nnn atool libarchive trash-cli rclone fuse2 xdg-utils
 <span class="c1"># 命令模糊搜索 fzf</span>
-pacman -S fzf --needed --noconfirm --force
+pacman -S fzf --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 目录文件搜索 fd</span>
-pacman -S fd --needed --noconfirm --force
+pacman -S fd --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 文件内容搜索 rg ag ack</span>
-pacman -S ripgrep the_silver_searcher ack --needed --noconfirm --force
+pacman -S ripgrep the_silver_searcher ack --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 彩色cat、彩色日志、彩色diff</span>
-pacman -S bat ccze diff-so-fancy colordiff --noconfirm --needed --force
+pacman -S bat ccze diff-so-fancy colordiff --noconfirm --needed --overwrite <span class="s1">&#39;*&#39;</span>
+<span class="c1">#         diff </span>
+pacman -S git-delta --noconfirm --needed --overwrite <span class="s1">&#39;*&#39;</span>
+<span class="c1">#         sed</span>
+pacman -S sd --noconfirm --needed --overwrite <span class="s1">&#39;*&#39;</span>
+<span class="c1">#         shell任务管理器</span>
+pacman -S pueue --noconfirm --needed --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端表格、文本三神器</span>
-pacman -S awk sed grep --needed --noconfirm --force
+pacman -S awk sed grep --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># TERM=screen-256color sshpass -p &#39;fm09j#Ojiogj32i&#39; ssh -p 2222 -o ServerAliveInterval=60 root@127.0.0.1</span>
-pacman -S sshpass mosh --needed --noconfirm --force
+pacman -S sshpass mosh --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 查看进度</span>
-pacman -S progress --needed --noconfirm --force
+pacman -S progress --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 目录树形结构</span>
-pacman -S exa tree --needed --noconfirm --force
+pacman -S exa tree --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 回收站</span>
-pacman -S trash-cli --needed --noconfirm --force
+pacman -S trash-cli --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 解压软件</span>
 pacman -S p7zip-natspec rar zip unzip-natspec --needed --noconfirm
 <span class="c1"># 支持NTFS文件系统</span>
 pacman -S ntfs-3g dosfstools --needed --noconfirm
 <span class="c1"># 挂载远程ssh目录</span>
-pacman -S sshfs --needed --noconfirm --force
+pacman -S sshfs --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端音乐</span>
-pacman -S cmus --needed --noconfirm --force
+pacman -S cmus --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端二维码 echo &#34;http://baidu.com&#34; | qrencode -o - -t UTF8</span>
-pacman -S qrencode --needed --noconfirm --force
+pacman -S qrencode --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 局域网的ip二维码上下传文件</span>
-yay -S qrcp --needed --noconfirm --force
+yay -S qrcp --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># HTTP代理</span>
-pacman -S squid --needed --noconfirm --force
+pacman -S squid --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># http共享</span>
 sudo npm install -g serve
 <span class="c1"># youtube、youku下载工具、BT下载工具</span>
-pacman -S wget curl axel aria2 transmission-cli you-get youtube-dl --needed --noconfirm --force
+pacman -S wget curl axel aria2 transmission-cli you-get youtube-dl --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 翻译</span>
-pacman -S translate-shell  --needed --noconfirm --force
+pacman -S translate-shell  --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 
 <span class="c1"># 图片处理</span>
-pacman -S  imagemagick --needed --noconfirm --force
+pacman -S  imagemagick --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端GIF,终端录屏</span>
-pacman -S asciinema --needed --noconfirm --force
+pacman -S asciinema --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 文本转图表</span>
-pacman -S graphviz --needed --noconfirm --force
+pacman -S graphviz --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 文档转换</span>
-pacman -S pandoc --needed --noconfirm --force
+pacman -S pandoc --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 处理 Excel 或 CSV ，csvkit 提供了 in2csv，csvcut，csvjoin，csvgrep 等方便易用的工具</span>
-yay -S csvkit --needed --noconfirm --force
+yay -S csvkit --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># json文件处理以及格式化显示</span>
-pacman -S jq --needed --noconfirm --force
+pacman -S jq --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 终端艺术字体</span>
-pacman -S figlet --needed --noconfirm --force
+pacman -S figlet --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1"># 计算工具</span>
-pacman -S datamash --needed --noconfirm --force
+pacman -S datamash --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 监听文件变更运行命令</span>
-pacman -S entr --needed --noconfirm --force
+pacman -S entr --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 文件传输 rsync</span>
-pacman -S rsync  --needed --noconfirm --force
+pacman -S rsync  --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 
 <span class="c1"># cpu限速</span>
-pacman -S cpulimit --needed --noconfirm --force
+pacman -S cpulimit --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 网络限速</span>
-yay -S wondershaper-git --needed --noconfirm --force
+yay -S wondershaper-git --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 邮件伪造</span>
-pacman -S swaks --needed --noconfirm --force
+pacman -S swaks --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 暴力破解工具</span>
-pacman -S hydra hashcat fcrackzip --needed --noconfirm --force
+pacman -S hydra hashcat fcrackzip --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 制作ISO镜像</span>
 <span class="c1"># xorriso -as mkisofs -R -J -T -v --no-emul-boot --boot-load-size 4 --boot-info-table -V &#34;CentOS&#34; -c isolinux/boot.cat -b isolinux/isolinux.bin -o ./boot.iso ./centos7-cdrom/</span>
-pacman -S xorriso mkisolinux --needed --noconfirm --force
+pacman -S xorriso mkisolinux --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 
 <span class="c1">############### GUI  ###########</span>
 <span class="c1"># 启动工具</span>
-pacman -S rofi --needed --noconfirm --force
+pacman -S rofi --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 截图</span>
-pacman -S scrot flamescrot maim --needed --noconfirm --force
+pacman -S scrot flameshot maim --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
+<span class="c1"># 显示键盘按键</span>
+pacman -S screenkey --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 图像预览</span>
-pacman -S feh --noconfirm --force --needed
+pacman -S feh --noconfirm --overwrite <span class="s1">&#39;*&#39;</span> --needed
 <span class="c1"># proxy</span>
-pacman -S qv2ray v2ray  proxychains --needed --noconfirm --force
+pacman -S qv2ray v2ray  proxychains --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 输入法</span>
-pacman -S librime ibus-rime --needed --noconfirm
+pacman -S librime ibus-rime --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 字体</span>
-pacman -S nerd-fonts-complete otf-font-awesome ttf-dejavu powerline-fonts noto-fonts-cjk --needed --noconfirm
+pacman -S nerd-fonts-complete otf-font-awesome ttf-dejavu powerline-fonts noto-fonts-cjk --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># wqy</span>
-pacman -S <span class="sb">`</span>sudo pacman -Ssq <span class="s1">&#39;wqy-*&#39;</span><span class="sb">`</span> --needed --noconfirm
+pacman -S <span class="sb">`</span>sudo pacman -Ssq <span class="s1">&#39;wqy-*&#39;</span><span class="sb">`</span> --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># adobe</span>
-pacman -S <span class="sb">`</span>sudo pacman -Ssq <span class="s1">&#39;adobe-source-*&#39;</span><span class="sb">`</span> --needed --noconfirm
+pacman -S <span class="sb">`</span>sudo pacman -Ssq <span class="s1">&#39;adobe-source-*&#39;</span><span class="sb">`</span> --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 安装浏览器</span>
 pacman -S chromium firefox firefox-i18n-zh-cn pepper-flash --needed --noconfirm
 <span class="c1"># Telegram</span>
-pacman -S telegram-desktop --needed --noconfirm --force
+pacman -S telegram-desktop --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 影音播放</span>
-pacman -S vlc mpd mpv kodi ffmpeg mplayer smplayer --needed --noconfirm --force
+pacman -S vlc mpd mpv kodi ffmpeg mplayer smplayer --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 下载</span>
-pacman -S qbittorrent amule --needed --noconfirm --force
+pacman -S qbittorrent amule --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># FTP</span>
-pacman -S filezilla --needed --noconfirm --force
+pacman -S filezilla --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 截图转Latex语法</span>
-yay -S mathpix-snipping-tool --needed --noconfirm --force
+yay -S mathpix-snipping-tool --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 图像编辑</span>
-pacman -S krita gimp --needed --noconfirm --force         <span class="c1">#图像编辑</span>
-pacman -S inkscape --needed --noconfirm --force           <span class="c1">#矢量图形编辑软件</span>
-pacman -S rawtherapee --needed --noconfirm --force        <span class="c1">#跨平台图片处理</span>
+pacman -S krita gimp --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>         <span class="c1">#图像编辑</span>
+pacman -S inkscape --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>           <span class="c1">#矢量图形编辑软件</span>
+pacman -S rawtherapee --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>        <span class="c1">#跨平台图片处理</span>
 <span class="c1"># 绘图</span>
-pacman -S mypaint --needed --noconfirm --force            <span class="c1">#绘画涂鸦软件</span>
-pacman -S blender --needed --noconfirm --force            <span class="c1">#3D工具</span>
+pacman -S mypaint --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>            <span class="c1">#绘画涂鸦软件</span>
+pacman -S blender --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>            <span class="c1">#3D工具</span>
 <span class="c1"># 文档查看</span>
-pacman -S evince foxitreader --needed --noconfirm --force <span class="c1"># PDF</span>
-pacman -S kchmviewer --needed --noconfirm --force         <span class="c1"># CHM</span>
-pacman -S calibre --needed --noconfirm --force            <span class="c1"># 图书转换器</span>
+pacman -S evince foxitreader --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span> <span class="c1"># PDF</span>
+pacman -S kchmviewer --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>         <span class="c1"># CHM</span>
+pacman -S calibre --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>            <span class="c1"># 图书转换器</span>
 <span class="c1"># 开源CAD</span>
-pacman -S kicad --needed --noconfirm --force
+pacman -S kicad --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 <span class="c1"># 蓝牙</span>
-pacman -S bluez bluez-utils pulseaudio-bluetooth --needed --noconfirm --force
+pacman -S bluez bluez-utils pulseaudio-bluetooth --needed --noconfirm --overwrite <span class="s1">&#39;*&#39;</span>
 systemctl start bluetooth.service
 systemctl <span class="nb">enable</span> bluetooth.service
 </code></pre></td></tr></table>
@@ -693,6 +712,25 @@ useradd -g wheel yx
 <span class="c1">## grub</span>
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="录屏">录屏</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ffmpeg -video_size 1920x1080 -framerate <span class="m">30</span> -f x11grab -i :0.0 output.mp4
+<span class="c1"># 录制音频和视频</span>
+ffmpeg -video_size 1920x1080 -framerate <span class="m">30</span> -f x11grab -i :0.0 -f alsa -ac <span class="m">2</span> -i hw:0 output.mp4
+<span class="c1"># 无损录制</span>
+ffmpeg -video_size 1920x1080 -framerate <span class="m">30</span> -f x11grab -i :0.0 -c:v libx264  -qp <span class="m">0</span> -preset ultrafast output.mkv
+
+</code></pre></td></tr></table>
+</div>
 </div><h2 id="linux-xorg">Linux Xorg</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -754,6 +792,56 @@ xprop
 xdg-settings <span class="nb">set</span> default-web-browser google-chrome.desktop
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="投影">投影</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 第一条命令：查看已连接的可视化设备</span>
+xrandr <span class="p">|</span> grep -v disconnected <span class="p">|</span> grep connected
+
+<span class="c1"># 第二条命令：新建分屏（例如：我的主屏幕是eDP-1，新建屏是HDMI-2）--mode 1920x1080</span>
+xrandr --output HDMI-2 --auto --right-of eDP-1
+xrandr --output HDMI-2 --auto --same-as eDP-1
+xrandr --output HDMI-2 --auto --left-of eDP-1
+
+<span class="c1"># 第三条命令：关闭分屏</span>
+xrandr --output HDMI-2 --off
+
+使用扩展模式
+设置指定显示器为主屏幕：xrandr --output eDP-1 --primary
+设置多个显示器之间的相对位置：xrandr --output eDP-1 --left-of HDMI-2
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="zsh">zsh</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 设置oh-my-zsh不读取文件变化信息</span>
+git config --add oh-my-zsh.hide-dirty <span class="m">1</span>
+<span class="c1"># 设置oh-my-zsh不读取任何git信息</span>
+git config --add oh-my-zsh.hide-status <span class="m">1</span>
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -782,7 +870,7 @@ xdg-settings <span class="nb">set</span> default-web-browser google-chrome.deskt
       <nav class="post-nav">
         <a class="prev" href="/post/programming/js_utils/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">JavaScript Utils</span>
+            <span class="prev-text nav-default">HTTP</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/devops/docker/">
@@ -838,7 +926,7 @@ xdg-settings <span class="nb">set</span> default-web-browser google-chrome.deskt
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

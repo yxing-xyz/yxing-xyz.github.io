@@ -6,7 +6,16 @@
     <description>Recent content in Golang on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 05 Aug 2020 23:08:00 +0800</lastBuildDate><atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 10:29:00 +0800</lastBuildDate><atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>结构体</title>
+      <link>/post/programming/struct/</link>
+      <pubDate>Tue, 31 Aug 2021 10:29:00 +0800</pubDate>
+      
+      <guid>/post/programming/struct/</guid>
+      <description>定义 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 // c #include &amp;lt;stdio.h&amp;gt;typedef struct _user { char name[64]; int age; } user; int main(int argc, char *argv[]) { user user = { .name=&amp;#34;jack&amp;#34;, .age=20 }; printf(&amp;#34;%s\n&amp;#34;, user.name); printf(&amp;#34;%d\n&amp;#34;, user.age); return 0; } 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18</description>
+    </item>
+    
     <item>
       <title>Golang</title>
       <link>/post/programming/golang/</link>

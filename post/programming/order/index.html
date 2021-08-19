@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>订单业务 - 何年重遇天涯</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="何年重遇天涯" /><meta name="description" content="商品表 字段设计bit与表示这个商品是否在限制某种用户限制, 用户总库存, 用户年库存, 用户月库存, 用户周库存, 用户日库存 订单商品表 字段设计订单i" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
+
+
+<link rel="canonical" href="/post/programming/order/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="订单业务" />
+<meta property="og:description" content="商品表 字段设计bit与表示这个商品是否在限制某种用户限制, 用户总库存, 用户年库存, 用户月库存, 用户周库存, 用户日库存 订单商品表 字段设计订单i" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/programming/order/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-14T13:20:00+08:00" />
+<meta property="article:modified_time" content="2021-11-14T13:20:00+08:00" />
+
+<meta itemprop="name" content="订单业务">
+<meta itemprop="description" content="商品表 字段设计bit与表示这个商品是否在限制某种用户限制, 用户总库存, 用户年库存, 用户月库存, 用户周库存, 用户日库存 订单商品表 字段设计订单i"><meta itemprop="datePublished" content="2021-11-14T13:20:00+08:00" />
+<meta itemprop="dateModified" content="2021-11-14T13:20:00+08:00" />
+<meta itemprop="wordCount" content="1531">
+<meta itemprop="keywords" content="Business logic," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="订单业务"/>
+<meta name="twitter:description" content="商品表 字段设计bit与表示这个商品是否在限制某种用户限制, 用户总库存, 用户年库存, 用户月库存, 用户周库存, 用户日库存 订单商品表 字段设计订单i"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">何年重遇天涯</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About Me</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">何年重遇天涯</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About Me</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">订单业务</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-14 </span>
+        <div class="post-category">
+            <a href="/categories/programming/"> Programming </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#商品表">商品表</a></li>
+    <li><a href="#订单商品表">订单商品表</a></li>
+    <li><a href="#订单创建接口">订单创建接口</a></li>
+    <li><a href="#订单创建支付二合一接口">订单创建支付二合一接口</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="商品表">商品表</h1>
+<ol>
+<li>字段设计bit与表示这个商品是否在限制某种用户限制, 用户总库存, 用户年库存, 用户月库存, 用户周库存, 用户日库存</li>
+</ol>
+<h1 id="订单商品表">订单商品表</h1>
+<ol>
+<li>字段设计订单id_商品id做联合主键</li>
+</ol>
+<h1 id="订单创建接口">订单创建接口</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1. 客户端点击创建订单
+   用户ID
+   商品ID
+   门店ID(业务需要)
+
+2. 服务端
+   1. 参数校验
+      _sid在中间件校验了用户合法性
+
+   2. 判断商品表是否存在某种用户限制
+   不存在限制:
+      1. 写入rocketmq事物消息记录订单所有信息, 2. lua脚本: 记录订单扣减流水和扣减总库存, 3. 创建订单信息和订单商品表(mysql事物) commit, 4. 上述流程的处理流程全都正确, commit rocket事物消息, 否则按照下面的逻辑处理
+             1.失败直接返回客户端rocket错误,服务器繁忙
+             2.失败库存不足.commit事物不需要要补偿了
+             3.失败返回创建订单失败,服务器繁忙, 不要commit rocket事物,需要补偿最终一致性
+             4.事物消息本身的commit成功失败不需要处理, 因为后续的事物的补偿是业务幂等的多执行几次或者不执行都不影响业务正常运行
+         消息队列事物补偿逻辑:
+
+   存在限制:
+      1. 先进行用户限制的简单判断,不满足直接返回给用户库存不足或者达到限制条件, 主要是为了用户体验
+      2. 和不存在限制的流程一样, 只是需要注意以下几点.
+         1. lua脚本: 需要加上判断用户限制条件是否满足,不满足 然后记录订单流水, 扣减总库存, 递增用户商品库存限制值.返回的信息也可以根据lua返回值判断是否总库存不足还是达到限制
+         2. 消息事物补偿库存lua脚本里还需要补偿递增的用户限制条件值
+   消息事物补偿:
+     从消息中取出订单信息, 订单是否入库,
+                         入库,就不需要管了,代表创建逻辑走完了
+                         没有入库, 就回滚库存(如果商品有用户条件限制,那么用户条件限制也需要回滚), 可能创建出现故障了,客户端也不知道订单是创建好了所以直接回滚库存,不要补偿订单了.
+   订单自动超时脚本:
+      定时执行sql如下: UPDATE status = 自动取消 WHERE status = 待支付 AND 数据库中的三方支付超时字段 &lt; 当前时间 - 预期支付回调时长(30s),多30s的缓冲时间
+      定时执行时间取30s, 保证支付超时不超时60内就会取消
+      订单状态字段: 1:待支付 2:自动取消 3:已支付 20:待接单 21:已接单 22:配送中 22:配送异常  23:配送完成 100:完成 111:已退款
+      后续就算是三方支付接口: 我们只需要判断是status &lt;= 自动取消状态 立即 变更回来已支付即可,即可冲正状态
+
+注意点:
+1. redis集群模式我猜测lua脚本会有先后性问题, 设计规划的时候确保处于一个key下,这样就保证会分发在一个slot,从而lua能执行是单线程
+2. 事物补偿逻辑做幂等性, 事物补偿逻辑因为只有redis和mysql所以只需要判断最后的mysq,即可确定redis如何补偿, 还有其他步骤依然需要细细斟酌补偿机制.
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="订单创建支付二合一接口">订单创建支付二合一接口</h1>
+<p>多了一个调用三方支付接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">      1. 写入rocketmq事物消息记录订单所有信息, 2. lua脚本: 记录订单扣减流水和扣减总库存, 3. 创建订单信息和订单商品表(mysql事物)
+      4. 调用第三方支付接口                  5. 上述流程的处理流程全都正确, commit rocket事物消息, 否则按照下面的逻辑处理
+             1.失败直接返回客户端rocket错误,服务器繁忙
+             2.失败库存不足.commit事物不需要要补偿了
+             3.失败返回创建订单失败,服务器繁忙, 不要commit rocket事物,需要补偿最终一致性
+             4.失败了直接返回创建支付失败给客户端, 且commit rocket事物, 因为rocket补偿只做了redis和mysql.补偿也没有意义
+             4.事物消息本身的commit成功失败不需要处理, 因为后续的事物的补偿是业务幂等的多执行几次或者不执行都不影响业务正常运行
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">何年重遇天涯</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-14
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank">Creative Commons Attribution-ShareAlike License</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/business-logic/">Business logic</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/programming/mq/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">中间件</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/linux/systctl/">
+            <span class="next-text nav-default">sysctl</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

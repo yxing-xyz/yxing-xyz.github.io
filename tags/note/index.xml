@@ -6,7 +6,16 @@
     <description>Recent content in note on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 10 Jul 2021 12:32:00 +0800</lastBuildDate><atom:link href="/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Sep 2021 16:21:00 +0800</lastBuildDate><atom:link href="/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSL/TLS</title>
+      <link>/post/programming/ssl_tls/</link>
+      <pubDate>Sat, 18 Sep 2021 16:21:00 +0800</pubDate>
+      
+      <guid>/post/programming/ssl_tls/</guid>
+      <description>流程 SSL/TLS流程 nginx证书和apache证书 apache和nginx的配置都是私钥key一个文件 apache是三个文件将中间链证书</description>
+    </item>
+    
     <item>
       <title>运维笔记</title>
       <link>/post/devops/note/</link>

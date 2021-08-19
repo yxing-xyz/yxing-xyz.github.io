@@ -6,7 +6,106 @@
     <description>Recent content in Posts on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 18 Aug 2021 21:56:00 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Dec 2021 14:58:00 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rabin Karp Search</title>
+      <link>/post/algorithm/rabin_karp_search/</link>
+      <pubDate>Thu, 23 Dec 2021 14:58:00 +0800</pubDate>
+      
+      <guid>/post/algorithm/rabin_karp_search/</guid>
+      <description>算法 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 #include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt; using</description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>/post/programming/sql/</link>
+      <pubDate>Fri, 26 Nov 2021 21:27:00 +0800</pubDate>
+      
+      <guid>/post/programming/sql/</guid>
+      <description>MySQL 预编译批量插入 当预编译批量插入的时候数据量太大MySQL服务器会报错, 还是直接拼values的sql吧 1 Error 1390: Prepared statement contains too many placeholders 查询所有数据库占用</description>
+    </item>
+    
+    <item>
+      <title>中间件</title>
+      <link>/post/programming/mq/</link>
+      <pubDate>Sun, 14 Nov 2021 13:20:00 +0800</pubDate>
+      
+      <guid>/post/programming/mq/</guid>
+      <description>Redis redis集群版的lua脚本使用会有一致性问题, 需要确保处理的参数在一个slot下从而保证lua执行的单线程 RocketMQ 事物消息 事物消息是发送一个半</description>
+    </item>
+    
+    <item>
+      <title>订单业务</title>
+      <link>/post/programming/order/</link>
+      <pubDate>Sun, 14 Nov 2021 13:20:00 +0800</pubDate>
+      
+      <guid>/post/programming/order/</guid>
+      <description>商品表 字段设计bit与表示这个商品是否在限制某种用户限制, 用户总库存, 用户年库存, 用户月库存, 用户周库存, 用户日库存 订单商品表 字段设计订单i</description>
+    </item>
+    
+    <item>
+      <title>sysctl</title>
+      <link>/post/linux/systctl/</link>
+      <pubDate>Sun, 31 Oct 2021 09:20:00 +0800</pubDate>
+      
+      <guid>/post/linux/systctl/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70</description>
+    </item>
+    
+    <item>
+      <title>时间相关的算法</title>
+      <link>/post/algorithm/time/</link>
+      <pubDate>Tue, 26 Oct 2021 15:28:00 +0800</pubDate>
+      
+      <guid>/post/algorithm/time/</guid>
+      <description>北京时间按照日期向下取整 1 2 3 func FloorInCST(t int64) int64 { return t - (t + 8*3600)%86400 }</description>
+    </item>
+    
+    <item>
+      <title>Linux Kernel Module</title>
+      <link>/post/devops/kernel-module/</link>
+      <pubDate>Fri, 08 Oct 2021 17:52:00 +0800</pubDate>
+      
+      <guid>/post/devops/kernel-module/</guid>
+      <description>Linux模块加载 模块保存在/lib/modules/下。 使用/etc/modules-load.d/来配置系统启动时加载哪些模块。 使用/e</description>
+    </item>
+    
+    <item>
+      <title>SSL/TLS</title>
+      <link>/post/programming/ssl_tls/</link>
+      <pubDate>Sat, 18 Sep 2021 16:21:00 +0800</pubDate>
+      
+      <guid>/post/programming/ssl_tls/</guid>
+      <description>流程 SSL/TLS流程 nginx证书和apache证书 apache和nginx的配置都是私钥key一个文件 apache是三个文件将中间链证书</description>
+    </item>
+    
+    <item>
+      <title>Linux基础</title>
+      <link>/post/linux/linux_base/</link>
+      <pubDate>Fri, 10 Sep 2021 22:27:00 +0800</pubDate>
+      
+      <guid>/post/linux/linux_base/</guid>
+      <description>whatis whatis 命令是用于查询一个命令的功能，并将查询结果打印到终端上。 whatis 命令在 man -w 显示的文件中查找 command 参数指定的命令、系统调用、库函数或特殊文件名。wh</description>
+    </item>
+    
+    <item>
+      <title>Linux IPtables</title>
+      <link>/post/linux/iptables/</link>
+      <pubDate>Thu, 02 Sep 2021 16:17:00 +0800</pubDate>
+      
+      <guid>/post/linux/iptables/</guid>
+      <description>五表五链 1 2 3 4 5 6 7 8 9 security表：主要针对的是数据链路层的管理规则组合，只不过它是基于target目标来操作的。 filter表：</description>
+    </item>
+    
+    <item>
+      <title>结构体</title>
+      <link>/post/programming/struct/</link>
+      <pubDate>Tue, 31 Aug 2021 10:29:00 +0800</pubDate>
+      
+      <guid>/post/programming/struct/</guid>
+      <description>定义 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 // c #include &amp;lt;stdio.h&amp;gt;typedef struct _user { char name[64]; int age; } user; int main(int argc, char *argv[]) { user user = { .name=&amp;#34;jack&amp;#34;, .age=20 }; printf(&amp;#34;%s\n&amp;#34;, user.name); printf(&amp;#34;%d\n&amp;#34;, user.age); return 0; } 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18</description>
+    </item>
+    
     <item>
       <title>Elisp</title>
       <link>/post/programming/elisp/</link>
@@ -31,7 +130,7 @@
       <pubDate>Wed, 16 Jun 2021 20:00:00 +0800</pubDate>
       
       <guid>/post/devops/bash_utils/</guid>
-      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done 日志 分割日志文件 1 split -b 104857600 -d -a 6 nohup.out ./2021-07-12_ 清空日志 1 2 sudo find . -name &amp;#34;*.log&amp;#34; -type f -size 1M</description>
+      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书</description>
     </item>
     
     <item>
@@ -94,7 +193,7 @@
       <pubDate>Thu, 14 May 2020 20:06:39 +0800</pubDate>
       
       <guid>/post/programming/c_macro_definition/</guid>
-      <description>Get structure member offset bytes You only need to include &amp;lt;stddef.h&amp;gt; to use offset or write the following code 1 #define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) &amp;lt;stdbool.h&amp;gt; You can use Booleans as long as you include &amp;lt;stdbool.h&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #ifndef _STDBOOL #define _STDBOOL #define __bool_true_false_are_defined 1 #ifndef __cplusplus #define bool _Bool #define false 0 #define true 1 #endif</description>
+      <description>Get structure member offset bytes You only need to include &amp;lt;stddef.h&amp;gt; to use offset or write the following code 1 #define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) Get structure size 1 2 #define ALIGN(size, boundary) (((size) + ((boundary)-1)) &amp;amp; ~((boundary)-1)) #define ALIGN_DEFAULT(size) ALIGN(size, 8) &amp;lt;stdbool.h&amp;gt; You can use Booleans as long as you include &amp;lt;stdbool.h&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #ifndef _STDBOOL</description>
     </item>
     
     <item>
@@ -152,7 +251,7 @@
     </item>
     
     <item>
-      <title>JavaScript Utils</title>
+      <title>HTTP</title>
       <link>/post/programming/js_utils/</link>
       <pubDate>Tue, 27 Aug 2019 17:28:00 +0800</pubDate>
       
@@ -211,7 +310,7 @@
       <pubDate>Fri, 13 Oct 2017 15:13:01 +0800</pubDate>
       
       <guid>/post/programming/operator_priority/</guid>
-      <description></description>
+      <description>++i和i++特殊例子 1 2 3 4 5 int a, i= 0 a = ++i // a = 1, i = 1 int b, j = 0 b = i++ // b = 0, j = 1</description>
     </item>
     
     <item>
@@ -221,15 +320,6 @@
       
       <guid>/post/linux/centos/</guid>
       <description>Centos 常用包 1 2 3 4 5 6 7 yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng \ libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib \ zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel \ ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel \ krb5 krb5-devel libidn libidn-devel open openssl openssl-devel \ openldap openldap-devel nss_ldap openldap-clients openldap-servers \ libmcrypt libmcrypt-devel mhash mhash-devel automake cmake emacs vimnn RPM 常用命令</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/post/programming/sql/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/programming/sql/</guid>
-      <description>MySQL 查询所有数据库占用空间 1 2 3 4 5 6 SELECTtable_schema,concat(TRUNCATE(SUM(data_length)/1024/1024,2),&amp;#39; MB&amp;#39;)ASdata_size,concat(TRUNCATE(SUM(index_length)/1024/1024,2),&amp;#39;MB&amp;#39;)ASindex_sizeFROMinformation_schema.tablesGROUPBYtable_schemaORDERBYdata_lengthDESC; 查询某一个数据库表占用空间 1 2 3 4 5 SELECTtable_name,concat(TRUNCATE(data_length/1024/1024,2),&amp;#39; MB&amp;#39;)ASdata_size,concat(TRUNCATE(index_length/1024/1024,2),&amp;#39; mb&amp;#39;)ASindex_sizeFROMinformation_schema.tablesWHEREtable_schema=&amp;#39;${database}&amp;#39;GROUPBytable_nameORDERBYdata_lengthDESC;</description>
     </item>
     
   </channel>

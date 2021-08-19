@@ -6,7 +6,52 @@
     <description>Recent content in Linux on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 07 Aug 2020 21:27:00 +0800</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 09:20:00 +0800</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sysctl</title>
+      <link>/post/linux/systctl/</link>
+      <pubDate>Sun, 31 Oct 2021 09:20:00 +0800</pubDate>
+      
+      <guid>/post/linux/systctl/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70</description>
+    </item>
+    
+    <item>
+      <title>Linux Kernel Module</title>
+      <link>/post/devops/kernel-module/</link>
+      <pubDate>Fri, 08 Oct 2021 17:52:00 +0800</pubDate>
+      
+      <guid>/post/devops/kernel-module/</guid>
+      <description>Linux模块加载 模块保存在/lib/modules/下。 使用/etc/modules-load.d/来配置系统启动时加载哪些模块。 使用/e</description>
+    </item>
+    
+    <item>
+      <title>Linux基础</title>
+      <link>/post/linux/linux_base/</link>
+      <pubDate>Fri, 10 Sep 2021 22:27:00 +0800</pubDate>
+      
+      <guid>/post/linux/linux_base/</guid>
+      <description>whatis whatis 命令是用于查询一个命令的功能，并将查询结果打印到终端上。 whatis 命令在 man -w 显示的文件中查找 command 参数指定的命令、系统调用、库函数或特殊文件名。wh</description>
+    </item>
+    
+    <item>
+      <title>Linux IPtables</title>
+      <link>/post/linux/iptables/</link>
+      <pubDate>Thu, 02 Sep 2021 16:17:00 +0800</pubDate>
+      
+      <guid>/post/linux/iptables/</guid>
+      <description>五表五链 1 2 3 4 5 6 7 8 9 security表：主要针对的是数据链路层的管理规则组合，只不过它是基于target目标来操作的。 filter表：</description>
+    </item>
+    
+    <item>
+      <title>Bash Utils</title>
+      <link>/post/devops/bash_utils/</link>
+      <pubDate>Wed, 16 Jun 2021 20:00:00 +0800</pubDate>
+      
+      <guid>/post/devops/bash_utils/</guid>
+      <description>同步时间 1 2 sudo ntpdate ntp.aliyun.com sudo hwclock -w curl http code 1 url=&amp;#39;https://test.juewei.com/actuator/health&amp;#39;; code=200; while [ $code -eq 200 ]; do code=`curl -I -m 30 -o /dev/null -s -w %{http_code}&amp;#34;\n&amp;#34; $url`; sleep 0.1; done openssl 查看https的证书信息 1 openssl s_client -servername prod.juewei.com -connect www.baidu.com:443 | openssl x509 -noout -dates 更换TLS证书</description>
+    </item>
+    
     <item>
       <title>The difference between su and sudo in Linux</title>
       <link>/post/linux/su_sudo/</link>
@@ -32,6 +77,15 @@
       
       <guid>/post/configure/linux_conf/</guid>
       <description>Arch 软件包 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66</description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>/post/devops/docker/</link>
+      <pubDate>Thu, 21 Jun 2018 14:55:46 +0800</pubDate>
+      
+      <guid>/post/devops/docker/</guid>
+      <description>安装 Centos 1 2 3 4 5 6 7 8 9 10 11 # step 1: 安装必要的一些系统工具 sudo yum install -y yum-utils device-mapper-persistent-data lvm2 # Step 2: 添加软件源信息 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # Step 3: 更新并安装 Docker-CE sudo yum makecache fast sudo yum -y install docker-ce pip install docker-compose</description>
     </item>
     
     <item>

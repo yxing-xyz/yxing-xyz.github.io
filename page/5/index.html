@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/" />
@@ -126,51 +126,9 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/bitwise_operator/">Bitwise Operation</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/programming/c_macro_definition/">C macro definition</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2017-11-23 </span>
-      <div class="post-category">
-          <a href="/categories/algorithm/"> Algorithm </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      基础 符号 描述 运算规则 &amp; 按位与 全为 1 为 1，否则为 0 | 按位或 全为 0 为 0，否则为 1 ~ 按位取反 0 变 1，1 变 0 &lt;&lt; 按位左移 各二进制位全部左移若干位，高位
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/bitwise_operator/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/configure/keyboard_mapping/">Keyboard Mapping</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-11-09 </span>
-      <div class="post-category">
-          <a href="/categories/configure/"> Configure </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Windows Download mapkeyboard, modify it by yourself, and then log out or restart it 下载 mapkeyboard软件修改然后重启机器 Linux Linux has TTY terminal and desktop operation modes TTY 1.修改键位表 1 2 3 4 5 6 7 8 9 10 11 12 cd /usr/share/kbd/keymaps/i386/qwerty # 解
-    </div>
-    <div class="read-more">
-      <a href="/post/configure/keyboard_mapping/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/programming/operator_priority/">Operator Priority</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-10-13 </span>
+      <span class="post-time"> 2020-05-14 </span>
       <div class="post-category">
           <a href="/categories/programming/"> Programming </a>
           </div>
@@ -179,50 +137,94 @@
   
   <div class="post-content">
     <div class="post-summary">
-      
+      Get structure member offset bytes You only need to include &lt;stddef.h&gt; to use offset or write the following code 1 #define offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER) Get structure size 1 2 #define ALIGN(size, boundary) (((size) + ((boundary)-1)) &amp; ~((boundary)-1)) #define ALIGN_DEFAULT(size) ALIGN(size, 8) &lt;stdbool.h&gt; You can use Booleans as long as you include &lt;stdbool.h&gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #ifndef _STDBOOL
     </div>
     <div class="read-more">
-      <a href="/post/programming/operator_priority/" class="read-more-link">阅读更多</a>
+      <a href="/post/programming/c_macro_definition/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/linux/centos/">Centos</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/character_set_conversion/">Character Set Conversion</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2017-07-09 </span>
+      <span class="post-time"> 2020-05-06 </span>
       <div class="post-category">
-          <a href="/categories/linux/"> Linux </a>
+          <a href="/categories/algorithm/"> Algorithm </a>
           </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Centos 常用包 1 2 3 4 5 6 7 yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng \ libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib \ zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel \ ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel \ krb5 krb5-devel libidn libidn-devel open openssl openssl-devel \ openldap openldap-devel nss_ldap openldap-clients openldap-servers \ libmcrypt libmcrypt-devel mhash mhash-devel automake cmake emacs vimnn RPM 常用命令
+      Unicode to UTF8 1 2 3 4 5 6 7 8 9 | Unicode符号范围 | UTF-8编码方式 n | (十六进制) | (二进制) ---+-----------------------+------------------------------------------------------ 1 | 0000 0000 - 0000 007F | 0xxxxxxx 2 | 0000 0080 - 0000 07FF | 110xxxxx 10xxxxxx 3 |
     </div>
     <div class="read-more">
-      <a href="/post/linux/centos/" class="read-more-link">阅读更多</a>
+      <a href="/post/algorithm/character_set_conversion/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/programming/sql/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/win/win_utils/">Windows Utils</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
+      <span class="post-time"> 2020-05-05 </span>
+      <div class="post-category">
+          <a href="/categories/windows/"> Windows </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      MySQL 查询所有数据库占用空间 1 2 3 4 5 6 SELECTtable_schema,concat(TRUNCATE(SUM(data_length)/1024/1024,2),&#39; MB&#39;)ASdata_size,concat(TRUNCATE(SUM(index_length)/1024/1024,2),&#39;MB&#39;)ASindex_sizeFROMinformation_schema.tablesGROUPBYtable_schemaORDERBYdata_lengthDESC; 查询某一个数据库表占用空间 1 2 3 4 5 SELECTtable_name,concat(TRUNCATE(data_length/1024/1024,2),&#39; MB&#39;)ASdata_size,concat(TRUNCATE(index_length/1024/1024,2),&#39; mb&#39;)ASindex_sizeFROMinformation_schema.tablesWHEREtable_schema=&#39;${database}&#39;GROUPBytable_nameORDERBYdata_lengthDESC;
+      CMD关闭防火墙 要用超级管理权限执行 1 2 3 4 ::注释 关闭所有防火墙 netsh advfirewall set allprofiles state off ::注释 查看防火墙的状态 netsh advfirewall show allprofiles CMD启动远程桌面 要用超级管理
     </div>
     <div class="read-more">
-      <a href="/post/programming/sql/" class="read-more-link">阅读更多</a>
+      <a href="/post/win/win_utils/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/configure/win_conf/">Windows Configuration</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-04 </span>
+      <div class="post-category">
+          <a href="/categories/configure/"> Configure </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Scoop 安装 最好开启代理然后再去执行脚本安装 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 IF ($PSVersionTable.PSVersion.Major -lt 3 -or $PSVersionTable.CLRVersion.Major -lt 4) { return &#34;PowerS
+    </div>
+    <div class="read-more">
+      <a href="/post/configure/win_conf/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/configure/proxy/">Proxy</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-04 </span>
+      <div class="post-category">
+          <a href="/categories/configure/"> Configure </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      CMD 1 2 set http_proxy=http://127.0.0.1:1080 set https_proxy=http://127.0.0.1:1080 PowerShell 用vscode编辑profile，profile类似bash的bashrc 1 2 set-executionpolicy remotesigned code $PROFILE 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+    </div>
+    <div class="read-more">
+      <a href="/post/configure/proxy/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -234,7 +236,10 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">上一页</span>
       </a>
-    
+    <a class="next" href="/page/6/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         
@@ -277,7 +282,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.3 with theme even" />
 
 
 <link rel="canonical" href="/post/configure/win_conf/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Windows Configuration">
 <meta itemprop="description" content="Scoop 安装 最好开启代理然后再去执行脚本安装 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 IF ($PSVersionTable.PSVersion.Major -lt 3 -or $PSVersionTable.CLRVersion.Major -lt 4) { return &#34;PowerS"><meta itemprop="datePublished" content="2020-05-04T12:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-07-22T14:28:00+08:00" />
-<meta itemprop="wordCount" content="254">
+<meta itemprop="wordCount" content="267">
 <meta itemprop="keywords" content="Windows," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Windows Configuration"/>
 <meta name="twitter:description" content="Scoop 安装 最好开启代理然后再去执行脚本安装 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 IF ($PSVersionTable.PSVersion.Major -lt 3 -or $PSVersionTable.CLRVersion.Major -lt 4) { return &#34;PowerS"/>
@@ -154,6 +154,7 @@
         </li>
         <li><a href="#winget">Winget</a></li>
         <li><a href="#win-配置文件">Win 配置文件</a></li>
+        <li><a href="#win重置网络">win重置网络</a></li>
       </ul>
     </li>
   </ul>
@@ -306,6 +307,17 @@ ccleaner
 <pre tabindex="0" class="chroma"><code class="language-ps1" data-lang="ps1"><span class="nb">mv </span><span class="n">Microsoft</span><span class="p">.</span><span class="n">PowerShell_profile</span><span class="p">.</span><span class="n">ps1</span> <span class="nv">$PROFILE</span> <span class="n">-FORCE</span>
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="win重置网络">win重置网络</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">ipconfig /release
+ipconfig /renew
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -390,7 +402,7 @@ ccleaner
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>何年重遇天涯</span>
   </span>
 </div>
 

@@ -6,7 +6,34 @@
     <description>Recent content in Linux on 何年重遇天涯</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 08 Dec 2020 16:28:00 +0800</lastBuildDate><atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 09:20:00 +0800</lastBuildDate><atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sysctl</title>
+      <link>/post/linux/systctl/</link>
+      <pubDate>Sun, 31 Oct 2021 09:20:00 +0800</pubDate>
+      
+      <guid>/post/linux/systctl/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70</description>
+    </item>
+    
+    <item>
+      <title>Linux基础</title>
+      <link>/post/linux/linux_base/</link>
+      <pubDate>Fri, 10 Sep 2021 22:27:00 +0800</pubDate>
+      
+      <guid>/post/linux/linux_base/</guid>
+      <description>whatis whatis 命令是用于查询一个命令的功能，并将查询结果打印到终端上。 whatis 命令在 man -w 显示的文件中查找 command 参数指定的命令、系统调用、库函数或特殊文件名。wh</description>
+    </item>
+    
+    <item>
+      <title>Linux IPtables</title>
+      <link>/post/linux/iptables/</link>
+      <pubDate>Thu, 02 Sep 2021 16:17:00 +0800</pubDate>
+      
+      <guid>/post/linux/iptables/</guid>
+      <description>五表五链 1 2 3 4 5 6 7 8 9 security表：主要针对的是数据链路层的管理规则组合，只不过它是基于target目标来操作的。 filter表：</description>
+    </item>
+    
     <item>
       <title>Linux Mirrors</title>
       <link>/post/linux/debian/</link>
